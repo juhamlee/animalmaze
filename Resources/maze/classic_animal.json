@@ -1,0 +1,2565 @@
+{
+    "folder": "maze/classic_animal/",
+    "stages": [
+        {
+            "index": 1,
+            "type": 1,
+            "file": "1.json",
+            "length": 3,
+            "collect": "",
+            "goal": "D",
+            "animal": 0
+        },
+        {
+            "index": 2,
+            "type": 1,
+            "file": "2.json",
+            "length": 3,
+            "collect": "D",
+            "goal": "O"
+        },
+        {
+            "index": 3,
+            "type": 1,
+            "file": "3.json",
+            "length": 3,
+            "collect": "DO",
+            "goal": "G",
+            "complete": true,
+            "nameAnimal": "DOG",
+            "nextAnimal": 1
+        },
+        {
+            "index": 4,
+            "type": 1,
+            "file": "4.json",
+            "length": 3,
+            "collect": "",
+            "goal": "C",
+            "animal": 1
+        },
+        {
+            "index": 5,
+            "type": 1,
+            "file": "5.json",
+            "length": 3,
+            "collect": "C",
+            "goal": "A"
+        },
+        {
+            "index": 6,
+            "type": 1,
+            "file": "6.json",
+            "length": 3,
+            "collect": "CA",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "CAT",
+            "nextAnimal": 2
+        },
+        {
+            "index": 7,
+            "type": 1,
+            "file": "7.json",
+            "length": 7,
+            "collect": "",
+            "goal": "P",
+            "animal": 2
+        },
+        {
+            "index": 8,
+            "type": 1,
+            "file": "8.json",
+            "length": 7,
+            "collect": "P",
+            "goal": "E"
+        },
+        {
+            "index": 9,
+            "type": 1,
+            "file": "9.json",
+            "length": 7,
+            "collect": "PE",
+            "goal": "N"
+        },
+        {
+            "index": 10,
+            "type": 1,
+            "file": "10.json",
+            "length": 7,
+            "collect": "PEN",
+            "goal": "G"
+        },
+        {
+            "index": 11,
+            "type": 1,
+            "file": "11.json",
+            "length": 7,
+            "collect": "PENG",
+            "goal": "U"
+        },
+        {
+            "index": 12,
+            "type": 1,
+            "file": "12.json",
+            "length": 7,
+            "collect": "PENGU",
+            "goal": "I"
+        },
+        {
+            "index": 13,
+            "type": 1,
+            "file": "13.json",
+            "length": 7,
+            "collect": "PENGUI",
+            "goal": "N",
+            "complete": true,
+            "nameAnimal": "PENGUIN",
+            "nextAnimal": 20
+        },
+        {
+            "index": 14,
+            "type": 1,
+            "file": "14.json",
+            "length": 3,
+            "collect": "",
+            "goal": "F",
+            "animal": 20
+        },
+        {
+            "index": 15,
+            "type": 1,
+            "file": "15.json",
+            "length": 3,
+            "collect": "F",
+            "goal": "O"
+        },
+        {
+            "index": 16,
+            "type": 1,
+            "file": "16.json",
+            "length": 3,
+            "collect": "FO",
+            "goal": "X",
+            "complete": true,
+            "nameAnimal": "FOX",
+            "nextAnimal": 3
+        },
+        {
+            "index": 17,
+            "type": 1,
+            "file": "17.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 3
+        },
+        {
+            "index": 18,
+            "type": 1,
+            "file": "18.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "I"
+        },
+        {
+            "index": 19,
+            "type": 1,
+            "file": "19.json",
+            "length": 4,
+            "collect": "BI",
+            "goal": "R"
+        },
+        {
+            "index": 20,
+            "type": 1,
+            "file": "20.json",
+            "length": 4,
+            "collect": "BIR",
+            "goal": "D",
+            "complete": true,
+            "nameAnimal": "BIRD",
+            "nextAnimal": 4
+        },
+        {
+            "index": 21,
+            "type": 1,
+            "file": "21.json",
+            "length": 4,
+            "collect": "",
+            "goal": "W",
+            "animal": 4
+        },
+        {
+            "index": 22,
+            "type": 1,
+            "file": "22.json",
+            "length": 4,
+            "collect": "W",
+            "goal": "O"
+        },
+        {
+            "index": 23,
+            "type": 1,
+            "file": "23.json",
+            "length": 4,
+            "collect": "WO",
+            "goal": "L"
+        },
+        {
+            "index": 24,
+            "type": 1,
+            "file": "24.json",
+            "length": 4,
+            "collect": "WOL",
+            "goal": "F",
+            "complete": true,
+            "nameAnimal": "WOLF",
+            "nextAnimal": 5
+        },
+        {
+            "index": 25,
+            "type": 1,
+            "file": "25.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 5
+        },
+        {
+            "index": 26,
+            "type": 1,
+            "file": "26.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "E"
+        },
+        {
+            "index": 27,
+            "type": 1,
+            "file": "27.json",
+            "length": 4,
+            "collect": "DE",
+            "goal": "A"
+        },
+        {
+            "index": 28,
+            "type": 1,
+            "file": "28.json",
+            "length": 4,
+            "collect": "DEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "DEAR",
+            "nextAnimal": 6
+        },
+        {
+            "index": 29,
+            "type": 1,
+            "file": "29.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 6
+        },
+        {
+            "index": 30,
+            "type": 1,
+            "file": "30.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "U"
+        },
+        {
+            "index": 31,
+            "type": 1,
+            "file": "31.json",
+            "length": 4,
+            "collect": "DU",
+            "goal": "C"
+        },
+        {
+            "index": 32,
+            "type": 1,
+            "file": "32.json",
+            "length": 4,
+            "collect": "DUC",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "DUCK",
+            "nextAnimal": 7
+        },
+        {
+            "index": 33,
+            "type": 1,
+            "file": "33.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 7
+        },
+        {
+            "index": 34,
+            "type": 1,
+            "file": "34.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "E"
+        },
+        {
+            "index": 35,
+            "type": 1,
+            "file": "35.json",
+            "length": 4,
+            "collect": "BE",
+            "goal": "A"
+        },
+        {
+            "index": 36,
+            "type": 1,
+            "file": "36.json",
+            "length": 4,
+            "collect": "BEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "BEAR",
+            "nextAnimal": 8
+        },
+        {
+            "index": 37,
+            "type": 1,
+            "file": "37.json",
+            "length": 5,
+            "collect": "",
+            "goal": "M",
+            "animal": 8
+        },
+        {
+            "index": 38,
+            "type": 1,
+            "file": "38.json",
+            "length": 5,
+            "collect": "M",
+            "goal": "O"
+        },
+        {
+            "index": 39,
+            "type": 1,
+            "file": "39.json",
+            "length": 5,
+            "collect": "MO",
+            "goal": "U"
+        },
+        {
+            "index": 40,
+            "type": 1,
+            "file": "40.json",
+            "length": 5,
+            "collect": "MOU",
+            "goal": "S"
+        },
+        {
+            "index": 41,
+            "type": 1,
+            "file": "41.json",
+            "length": 5,
+            "collect": "MOUS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "MOUSE",
+            "nextAnimal": 9
+        },
+        {
+            "index": 42,
+            "type": 1,
+            "file": "42.json",
+            "length": 5,
+            "collect": "",
+            "goal": "H",
+            "animal": 9
+        },
+        {
+            "index": 43,
+            "type": 1,
+            "file": "43.json",
+            "length": 5,
+            "collect": "H",
+            "goal": "O"
+        },
+        {
+            "index": 44,
+            "type": 1,
+            "file": "44.json",
+            "length": 5,
+            "collect": "HO",
+            "goal": "R"
+        },
+        {
+            "index": 45,
+            "type": 1,
+            "file": "45.json",
+            "length": 5,
+            "collect": "HOR",
+            "goal": "S"
+        },
+        {
+            "index": 46,
+            "type": 1,
+            "file": "46.json",
+            "length": 5,
+            "collect": "HORS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "HORSE",
+            "nextAnimal": 10
+        },
+        {
+            "index": 47,
+            "type": 1,
+            "file": "47.json",
+            "length": 5,
+            "collect": "",
+            "goal": "S",
+            "animal": 10
+        },
+        {
+            "index": 48,
+            "type": 1,
+            "file": "48.json",
+            "length": 5,
+            "collect": "S",
+            "goal": "H"
+        },
+        {
+            "index": 49,
+            "type": 1,
+            "file": "49.json",
+            "length": 5,
+            "collect": "SH",
+            "goal": "A"
+        },
+        {
+            "index": 50,
+            "type": 1,
+            "file": "50.json",
+            "length": 5,
+            "collect": "SHA",
+            "goal": "R"
+        },
+        {
+            "index": 51,
+            "type": 1,
+            "file": "51.json",
+            "length": 5,
+            "collect": "SHAR",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "SHARK",
+            "nextAnimal": 11
+        },
+        {
+            "index": 52,
+            "type": 1,
+            "file": "52.json",
+            "length": 5,
+            "collect": "",
+            "goal": "T",
+            "animal": 11
+        },
+        {
+            "index": 53,
+            "type": 1,
+            "file": "53.json",
+            "length": 5,
+            "collect": "T",
+            "goal": "I"
+        },
+        {
+            "index": 54,
+            "type": 1,
+            "file": "54.json",
+            "length": 5,
+            "collect": "TI",
+            "goal": "G"
+        },
+        {
+            "index": 55,
+            "type": 1,
+            "file": "55.json",
+            "length": 5,
+            "collect": "TIG",
+            "goal": "E"
+        },
+        {
+            "index": 56,
+            "type": 1,
+            "file": "56.json",
+            "length": 5,
+            "collect": "TIGE",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "TIGER",
+            "nextAnimal": 12
+        },
+        {
+            "index": 57,
+            "type": 1,
+            "file": "57.json",
+            "length": 6,
+            "collect": "",
+            "goal": "R",
+            "animal": 12
+        },
+        {
+            "index": 58,
+            "type": 1,
+            "file": "58.json",
+            "length": 6,
+            "collect": "R",
+            "goal": "A"
+        },
+        {
+            "index": 59,
+            "type": 1,
+            "file": "59.json",
+            "length": 6,
+            "collect": "RA",
+            "goal": "B"
+        },
+        {
+            "index": 60,
+            "type": 1,
+            "file": "60.json",
+            "length": 6,
+            "collect": "RAB",
+            "goal": "B"
+        },
+        {
+            "index": 61,
+            "type": 1,
+            "file": "61.json",
+            "length": 6,
+            "collect": "RABB",
+            "goal": "I"
+        },
+        {
+            "index": 62,
+            "type": 1,
+            "file": "62.json",
+            "length": 6,
+            "collect": "RABBI",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "RABBIT",
+            "nextAnimal": 13
+        },
+        {
+            "index": 63,
+            "type": 1,
+            "file": "63.json",
+            "length": 6,
+            "collect": "",
+            "goal": "T",
+            "animal": 13
+        },
+        {
+            "index": 64,
+            "type": 1,
+            "file": "64.json",
+            "length": 6,
+            "collect": "T",
+            "goal": "U"
+        },
+        {
+            "index": 65,
+            "type": 1,
+            "file": "65.json",
+            "length": 6,
+            "collect": "TU",
+            "goal": "R"
+        },
+        {
+            "index": 66,
+            "type": 1,
+            "file": "66.json",
+            "length": 6,
+            "collect": "TUR",
+            "goal": "T"
+        },
+        {
+            "index": 67,
+            "type": 1,
+            "file": "67.json",
+            "length": 6,
+            "collect": "TURT",
+            "goal": "L"
+        },
+        {
+            "index": 68,
+            "type": 1,
+            "file": "68.json",
+            "length": 6,
+            "collect": "TURTL",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "TURTLE",
+            "nextAnimal": 14
+        },
+        {
+            "index": 69,
+            "type": 1,
+            "file": "69.json",
+            "length": 4,
+            "collect": "",
+            "goal": "S",
+            "animal": 14
+        },
+        {
+            "index": 70,
+            "type": 1,
+            "file": "70.json",
+            "length": 4,
+            "collect": "S",
+            "goal": "E"
+        },
+        {
+            "index": 71,
+            "type": 1,
+            "file": "71.json",
+            "length": 4,
+            "collect": "SE",
+            "goal": "A"
+        },
+        {
+            "index": 72,
+            "type": 1,
+            "file": "72.json",
+            "length": 4,
+            "collect": "SEA",
+            "goal": "L",
+            "complete": true,
+            "nameAnimal": "SEAL",
+            "nextAnimal": 15
+        },
+        {
+            "index": 73,
+            "type": 1,
+            "file": "73.json",
+            "length": 4,
+            "collect": "",
+            "goal": "F",
+            "animal": 15
+        },
+        {
+            "index": 74,
+            "type": 1,
+            "file": "74.json",
+            "length": 4,
+            "collect": "F",
+            "goal": "R"
+        },
+        {
+            "index": 75,
+            "type": 1,
+            "file": "75.json",
+            "length": 4,
+            "collect": "FR",
+            "goal": "O"
+        },
+        {
+            "index": 76,
+            "type": 1,
+            "file": "76.json",
+            "length": 4,
+            "collect": "FRO",
+            "goal": "G",
+            "complete": true,
+            "nameAnimal": "FROG",
+            "nextAnimal": 16
+        },
+        {
+            "index": 77,
+            "type": 1,
+            "file": "77.json",
+            "length": 4,
+            "collect": "",
+            "goal": "M",
+            "animal": 16
+        },
+        {
+            "index": 78,
+            "type": 1,
+            "file": "78.json",
+            "length": 4,
+            "collect": "M",
+            "goal": "O"
+        },
+        {
+            "index": 79,
+            "type": 1,
+            "file": "79.json",
+            "length": 4,
+            "collect": "MO",
+            "goal": "L"
+        },
+        {
+            "index": 80,
+            "type": 1,
+            "file": "80.json",
+            "length": 4,
+            "collect": "MOL",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "MOLE",
+            "nextAnimal": 17
+        },
+        {
+            "index": 81,
+            "type": 1,
+            "file": "81.json",
+            "length": 7,
+            "collect": "",
+            "goal": "D",
+            "animal": 17
+        },
+        {
+            "index": 82,
+            "type": 1,
+            "file": "82.json",
+            "length": 7,
+            "collect": "D",
+            "goal": "O"
+        },
+        {
+            "index": 83,
+            "type": 1,
+            "file": "83.json",
+            "length": 7,
+            "collect": "DO",
+            "goal": "L"
+        },
+        {
+            "index": 84,
+            "type": 1,
+            "file": "84.json",
+            "length": 7,
+            "collect": "DOL",
+            "goal": "P"
+        },
+        {
+            "index": 85,
+            "type": 1,
+            "file": "85.json",
+            "length": 7,
+            "collect": "DOLP",
+            "goal": "H"
+        },
+        {
+            "index": 86,
+            "type": 1,
+            "file": "86.json",
+            "length": 7,
+            "collect": "DOLPH",
+            "goal": "I"
+        },
+        {
+            "index": 87,
+            "type": 1,
+            "file": "87.json",
+            "length": 7,
+            "collect": "DOLPHI",
+            "goal": "N",
+            "complete": true,
+            "nameAnimal": "DOLPHIN",
+            "nextAnimal": 18
+        },
+        {
+            "index": 88,
+            "type": 1,
+            "file": "88.json",
+            "length": 8,
+            "collect": "",
+            "goal": "H",
+            "animal": 18
+        },
+        {
+            "index": 89,
+            "type": 1,
+            "file": "89.json",
+            "length": 8,
+            "collect": "H",
+            "goal": "E"
+        },
+        {
+            "index": 90,
+            "type": 1,
+            "file": "90.json",
+            "length": 8,
+            "collect": "HE",
+            "goal": "D"
+        },
+        {
+            "index": 91,
+            "type": 1,
+            "file": "91.json",
+            "length": 8,
+            "collect": "HED",
+            "goal": "G"
+        },
+        {
+            "index": 92,
+            "type": 1,
+            "file": "92.json",
+            "length": 8,
+            "collect": "HEDG",
+            "goal": "E"
+        },
+        {
+            "index": 93,
+            "type": 1,
+            "file": "93.json",
+            "length": 8,
+            "collect": "HEDGE",
+            "goal": "H"
+        },
+        {
+            "index": 94,
+            "type": 1,
+            "file": "94.json",
+            "length": 8,
+            "collect": "HEDGEH",
+            "goal": "O"
+        },
+        {
+            "index": 95,
+            "type": 1,
+            "file": "95.json",
+            "length": 8,
+            "collect": "HEDGEHO",
+            "goal": "G",
+            "complete": true,
+            "nameAnimal": "HEDGEHOG",
+            "nextAnimal": 19
+        },
+        {
+            "index": 96,
+            "type": 1,
+            "file": "96.json",
+            "length": 3,
+            "collect": "",
+            "goal": "D",
+            "animal": 19
+        },
+        {
+            "index": 97,
+            "type": 1,
+            "file": "97.json",
+            "length": 3,
+            "collect": "D",
+            "goal": "O"
+        },
+        {
+            "index": 98,
+            "type": 1,
+            "file": "98.json",
+            "length": 3,
+            "collect": "DO",
+            "goal": "G",
+            "complete": true,
+            "nameAnimal": "DOG",
+            "nextAnimal": 1
+        },
+        {
+            "index": 99,
+            "type": 1,
+            "file": "99.json",
+            "length": 3,
+            "collect": "",
+            "goal": "C",
+            "animal": 1
+        },
+        {
+            "index": 100,
+            "type": 1,
+            "file": "100.json",
+            "length": 3,
+            "collect": "C",
+            "goal": "A"
+        },
+        {
+            "index": 101,
+            "type": 1,
+            "file": "101.json",
+            "length": 3,
+            "collect": "CA",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "CAT",
+            "nextAnimal": 2
+        },
+        {
+            "index": 102,
+            "type": 1,
+            "file": "102.json",
+            "length": 3,
+            "collect": "",
+            "goal": "F",
+            "animal": 2
+        },
+        {
+            "index": 103,
+            "type": 1,
+            "file": "103.json",
+            "length": 3,
+            "collect": "F",
+            "goal": "O"
+        },
+        {
+            "index": 104,
+            "type": 1,
+            "file": "104.json",
+            "length": 3,
+            "collect": "FO",
+            "goal": "X",
+            "complete": true,
+            "nameAnimal": "FOX",
+            "nextAnimal": 3
+        },
+        {
+            "index": 105,
+            "type": 1,
+            "file": "105.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 3
+        },
+        {
+            "index": 106,
+            "type": 1,
+            "file": "106.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "I"
+        },
+        {
+            "index": 107,
+            "type": 1,
+            "file": "107.json",
+            "length": 4,
+            "collect": "BI",
+            "goal": "R"
+        },
+        {
+            "index": 108,
+            "type": 1,
+            "file": "108.json",
+            "length": 4,
+            "collect": "BIR",
+            "goal": "D",
+            "complete": true,
+            "nameAnimal": "BIRD",
+            "nextAnimal": 4
+        },
+        {
+            "index": 109,
+            "type": 1,
+            "file": "109.json",
+            "length": 4,
+            "collect": "",
+            "goal": "W",
+            "animal": 4
+        },
+        {
+            "index": 110,
+            "type": 1,
+            "file": "110.json",
+            "length": 4,
+            "collect": "W",
+            "goal": "O"
+        },
+        {
+            "index": 111,
+            "type": 1,
+            "file": "111.json",
+            "length": 4,
+            "collect": "WO",
+            "goal": "L"
+        },
+        {
+            "index": 112,
+            "type": 1,
+            "file": "112.json",
+            "length": 4,
+            "collect": "WOL",
+            "goal": "F",
+            "complete": true,
+            "nameAnimal": "WOLF",
+            "nextAnimal": 5
+        },
+        {
+            "index": 113,
+            "type": 1,
+            "file": "113.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 5
+        },
+        {
+            "index": 114,
+            "type": 1,
+            "file": "114.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "E"
+        },
+        {
+            "index": 115,
+            "type": 1,
+            "file": "115.json",
+            "length": 4,
+            "collect": "DE",
+            "goal": "A"
+        },
+        {
+            "index": 116,
+            "type": 1,
+            "file": "116.json",
+            "length": 4,
+            "collect": "DEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "DEAR",
+            "nextAnimal": 6
+        },
+        {
+            "index": 117,
+            "type": 1,
+            "file": "117.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 6
+        },
+        {
+            "index": 118,
+            "type": 1,
+            "file": "118.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "U"
+        },
+        {
+            "index": 119,
+            "type": 1,
+            "file": "119.json",
+            "length": 4,
+            "collect": "DU",
+            "goal": "C"
+        },
+        {
+            "index": 120,
+            "type": 1,
+            "file": "120.json",
+            "length": 4,
+            "collect": "DUC",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "DUCK",
+            "nextAnimal": 7
+        },
+        {
+            "index": 121,
+            "type": 1,
+            "file": "121.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 7
+        },
+        {
+            "index": 122,
+            "type": 1,
+            "file": "122.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "E"
+        },
+        {
+            "index": 123,
+            "type": 1,
+            "file": "123.json",
+            "length": 4,
+            "collect": "BE",
+            "goal": "A"
+        },
+        {
+            "index": 124,
+            "type": 1,
+            "file": "124.json",
+            "length": 4,
+            "collect": "BEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "BEAR",
+            "nextAnimal": 8
+        },
+        {
+            "index": 125,
+            "type": 1,
+            "file": "125.json",
+            "length": 5,
+            "collect": "",
+            "goal": "M",
+            "animal": 8
+        },
+        {
+            "index": 126,
+            "type": 1,
+            "file": "126.json",
+            "length": 5,
+            "collect": "M",
+            "goal": "O"
+        },
+        {
+            "index": 127,
+            "type": 1,
+            "file": "127.json",
+            "length": 5,
+            "collect": "MO",
+            "goal": "U"
+        },
+        {
+            "index": 128,
+            "type": 1,
+            "file": "128.json",
+            "length": 5,
+            "collect": "MOU",
+            "goal": "S"
+        },
+        {
+            "index": 129,
+            "type": 1,
+            "file": "129.json",
+            "length": 5,
+            "collect": "MOUS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "MOUSE",
+            "nextAnimal": 9
+        },
+        {
+            "index": 130,
+            "type": 1,
+            "file": "130.json",
+            "length": 5,
+            "collect": "",
+            "goal": "H",
+            "animal": 9
+        },
+        {
+            "index": 131,
+            "type": 1,
+            "file": "131.json",
+            "length": 5,
+            "collect": "H",
+            "goal": "O"
+        },
+        {
+            "index": 132,
+            "type": 1,
+            "file": "132.json",
+            "length": 5,
+            "collect": "HO",
+            "goal": "R"
+        },
+        {
+            "index": 133,
+            "type": 1,
+            "file": "133.json",
+            "length": 5,
+            "collect": "HOR",
+            "goal": "S"
+        },
+        {
+            "index": 134,
+            "type": 1,
+            "file": "134.json",
+            "length": 5,
+            "collect": "HORS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "HORSE",
+            "nextAnimal": 10
+        },
+        {
+            "index": 135,
+            "type": 1,
+            "file": "135.json",
+            "length": 5,
+            "collect": "",
+            "goal": "S",
+            "animal": 10
+        },
+        {
+            "index": 136,
+            "type": 1,
+            "file": "136.json",
+            "length": 5,
+            "collect": "S",
+            "goal": "H"
+        },
+        {
+            "index": 137,
+            "type": 1,
+            "file": "137.json",
+            "length": 5,
+            "collect": "SH",
+            "goal": "A"
+        },
+        {
+            "index": 138,
+            "type": 1,
+            "file": "138.json",
+            "length": 5,
+            "collect": "SHA",
+            "goal": "R"
+        },
+        {
+            "index": 139,
+            "type": 1,
+            "file": "139.json",
+            "length": 5,
+            "collect": "SHAR",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "SHARK",
+            "nextAnimal": 11
+        },
+        {
+            "index": 140,
+            "type": 1,
+            "file": "140.json",
+            "length": 5,
+            "collect": "",
+            "goal": "T",
+            "animal": 11
+        },
+        {
+            "index": 141,
+            "type": 1,
+            "file": "141.json",
+            "length": 5,
+            "collect": "T",
+            "goal": "I"
+        },
+        {
+            "index": 142,
+            "type": 1,
+            "file": "142.json",
+            "length": 5,
+            "collect": "TI",
+            "goal": "G"
+        },
+        {
+            "index": 143,
+            "type": 1,
+            "file": "143.json",
+            "length": 5,
+            "collect": "TIG",
+            "goal": "E"
+        },
+        {
+            "index": 144,
+            "type": 1,
+            "file": "144.json",
+            "length": 5,
+            "collect": "TIGE",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "TIGER",
+            "nextAnimal": 12
+        },
+        {
+            "index": 145,
+            "type": 1,
+            "file": "145.json",
+            "length": 6,
+            "collect": "",
+            "goal": "R",
+            "animal": 12
+        },
+        {
+            "index": 146,
+            "type": 1,
+            "file": "146.json",
+            "length": 6,
+            "collect": "R",
+            "goal": "A"
+        },
+        {
+            "index": 147,
+            "type": 1,
+            "file": "147.json",
+            "length": 6,
+            "collect": "RA",
+            "goal": "B"
+        },
+        {
+            "index": 148,
+            "type": 1,
+            "file": "148.json",
+            "length": 6,
+            "collect": "RAB",
+            "goal": "B"
+        },
+        {
+            "index": 149,
+            "type": 1,
+            "file": "149.json",
+            "length": 6,
+            "collect": "RABB",
+            "goal": "I"
+        },
+        {
+            "index": 150,
+            "type": 1,
+            "file": "150.json",
+            "length": 6,
+            "collect": "RABBI",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "RABBIT",
+            "nextAnimal": 13
+        },
+        {
+            "index": 151,
+            "type": 1,
+            "file": "151.json",
+            "length": 6,
+            "collect": "",
+            "goal": "T",
+            "animal": 13
+        },
+        {
+            "index": 152,
+            "type": 1,
+            "file": "152.json",
+            "length": 6,
+            "collect": "T",
+            "goal": "U"
+        },
+        {
+            "index": 153,
+            "type": 1,
+            "file": "153.json",
+            "length": 6,
+            "collect": "TU",
+            "goal": "R"
+        },
+        {
+            "index": 154,
+            "type": 1,
+            "file": "154.json",
+            "length": 6,
+            "collect": "TUR",
+            "goal": "T"
+        },
+        {
+            "index": 155,
+            "type": 1,
+            "file": "155.json",
+            "length": 6,
+            "collect": "TURT",
+            "goal": "L"
+        },
+        {
+            "index": 156,
+            "type": 1,
+            "file": "156.json",
+            "length": 6,
+            "collect": "TURTL",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "TURTLE",
+            "nextAnimal": 14
+        },
+        {
+            "index": 157,
+            "type": 1,
+            "file": "157.json",
+            "length": 5,
+            "collect": "",
+            "goal": "W",
+            "animal": 14
+        },
+        {
+            "index": 158,
+            "type": 1,
+            "file": "158.json",
+            "length": 5,
+            "collect": "W",
+            "goal": "H"
+        },
+        {
+            "index": 159,
+            "type": 1,
+            "file": "159.json",
+            "length": 5,
+            "collect": "WH",
+            "goal": "A"
+        },
+        {
+            "index": 160,
+            "type": 1,
+            "file": "160.json",
+            "length": 5,
+            "collect": "WHA",
+            "goal": "L"
+        },
+        {
+            "index": 161,
+            "type": 1,
+            "file": "161.json",
+            "length": 5,
+            "collect": "WHAL",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "WHALE",
+            "nextAnimal": 21
+        },
+        {
+            "index": 162,
+            "type": 1,
+            "file": "162.json",
+            "length": 7,
+            "collect": "",
+            "goal": "R",
+            "animal": 21
+        },
+        {
+            "index": 163,
+            "type": 1,
+            "file": "163.json",
+            "length": 7,
+            "collect": "R",
+            "goal": "A"
+        },
+        {
+            "index": 164,
+            "type": 1,
+            "file": "164.json",
+            "length": 7,
+            "collect": "RA",
+            "goal": "C"
+        },
+        {
+            "index": 165,
+            "type": 1,
+            "file": "165.json",
+            "length": 7,
+            "collect": "RAC",
+            "goal": "C"
+        },
+        {
+            "index": 166,
+            "type": 1,
+            "file": "166.json",
+            "length": 7,
+            "collect": "RACC",
+            "goal": "O"
+        },
+        {
+            "index": 167,
+            "type": 1,
+            "file": "167.json",
+            "length": 7,
+            "collect": "RACCO",
+            "goal": "O"
+        },
+        {
+            "index": 168,
+            "type": 1,
+            "file": "168.json",
+            "length": 7,
+            "collect": "RACCOO",
+            "goal": "N",
+            "complete": true,
+            "nameAnimal": "RACCOON",
+            "nextAnimal": 22
+        },
+        {
+            "index": 169,
+            "type": 1,
+            "file": "169.json",
+            "length": 7,
+            "collect": "",
+            "goal": "M",
+            "animal": 22
+        },
+        {
+            "index": 170,
+            "type": 1,
+            "file": "170.json",
+            "length": 7,
+            "collect": "M",
+            "goal": "E"
+        },
+        {
+            "index": 171,
+            "type": 1,
+            "file": "171.json",
+            "length": 7,
+            "collect": "ME",
+            "goal": "E"
+        },
+        {
+            "index": 172,
+            "type": 1,
+            "file": "172.json",
+            "length": 7,
+            "collect": "MEE",
+            "goal": "R"
+        },
+        {
+            "index": 173,
+            "type": 1,
+            "file": "173.json",
+            "length": 7,
+            "collect": "MEER",
+            "goal": "C"
+        },
+        {
+            "index": 174,
+            "type": 1,
+            "file": "174.json",
+            "length": 7,
+            "collect": "MEERC",
+            "goal": "A"
+        },
+        {
+            "index": 175,
+            "type": 1,
+            "file": "175.json",
+            "length": 7,
+            "collect": "MEERCA",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "MEERCAT",
+            "nextAnimal": 23
+        },
+        {
+            "index": 176,
+            "type": 1,
+            "file": "176.json",
+            "length": 5,
+            "collect": "",
+            "goal": "O",
+            "animal": 23
+        },
+        {
+            "index": 177,
+            "type": 1,
+            "file": "177.json",
+            "length": 5,
+            "collect": "O",
+            "goal": "T"
+        },
+        {
+            "index": 178,
+            "type": 1,
+            "file": "178.json",
+            "length": 5,
+            "collect": "OT",
+            "goal": "T"
+        },
+        {
+            "index": 179,
+            "type": 1,
+            "file": "179.json",
+            "length": 5,
+            "collect": "OTT",
+            "goal": "E"
+        },
+        {
+            "index": 180,
+            "type": 1,
+            "file": "180.json",
+            "length": 5,
+            "collect": "OTTE",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "OTTER",
+            "nextAnimal": 24
+        },
+        {
+            "index": 181,
+            "type": 1,
+            "file": "181.json",
+            "length": 8,
+            "collect": "",
+            "goal": "E",
+            "animal": 24
+        },
+        {
+            "index": 182,
+            "type": 1,
+            "file": "182.json",
+            "length": 8,
+            "collect": "E",
+            "goal": "L"
+        },
+        {
+            "index": 183,
+            "type": 1,
+            "file": "183.json",
+            "length": 8,
+            "collect": "EL",
+            "goal": "E"
+        },
+        {
+            "index": 184,
+            "type": 1,
+            "file": "184.json",
+            "length": 8,
+            "collect": "ELE",
+            "goal": "P"
+        },
+        {
+            "index": 185,
+            "type": 1,
+            "file": "185.json",
+            "length": 8,
+            "collect": "ELEP",
+            "goal": "H"
+        },
+        {
+            "index": 186,
+            "type": 1,
+            "file": "186.json",
+            "length": 8,
+            "collect": "ELEPH",
+            "goal": "A"
+        },
+        {
+            "index": 187,
+            "type": 1,
+            "file": "187.json",
+            "length": 8,
+            "collect": "ELEPHA",
+            "goal": "N"
+        },
+        {
+            "index": 188,
+            "type": 1,
+            "file": "188.json",
+            "length": 8,
+            "collect": "ELEPHAN",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "ELEPHANT",
+            "nextAnimal": 25
+        },
+        {
+            "index": 189,
+            "type": 1,
+            "file": "189.json",
+            "length": 7,
+            "collect": "",
+            "goal": "C",
+            "animal": 25
+        },
+        {
+            "index": 190,
+            "type": 1,
+            "file": "190.json",
+            "length": 7,
+            "collect": "C",
+            "goal": "H"
+        },
+        {
+            "index": 191,
+            "type": 1,
+            "file": "191.json",
+            "length": 7,
+            "collect": "CH",
+            "goal": "E"
+        },
+        {
+            "index": 192,
+            "type": 1,
+            "file": "192.json",
+            "length": 7,
+            "collect": "CHE",
+            "goal": "E"
+        },
+        {
+            "index": 193,
+            "type": 1,
+            "file": "193.json",
+            "length": 7,
+            "collect": "CHEE",
+            "goal": "T"
+        },
+        {
+            "index": 194,
+            "type": 1,
+            "file": "194.json",
+            "length": 7,
+            "collect": "CHEET",
+            "goal": "A"
+        },
+        {
+            "index": 195,
+            "type": 1,
+            "file": "195.json",
+            "length": 7,
+            "collect": "CHEETA",
+            "goal": "H",
+            "complete": true,
+            "nameAnimal": "CHEETAH",
+            "nextAnimal": 26
+        },
+        {
+            "index": 196,
+            "type": 1,
+            "file": "196.json",
+            "length": 3,
+            "collect": "",
+            "goal": "D",
+            "animal": 26
+        },
+        {
+            "index": 197,
+            "type": 1,
+            "file": "197.json",
+            "length": 3,
+            "collect": "D",
+            "goal": "O"
+        },
+        {
+            "index": 198,
+            "type": 1,
+            "file": "198.json",
+            "length": 3,
+            "collect": "DO",
+            "goal": "G",
+            "complete": true,
+            "nameAnimal": "DOG",
+            "nextAnimal": 1
+        },
+        {
+            "index": 199,
+            "type": 1,
+            "file": "199.json",
+            "length": 3,
+            "collect": "",
+            "goal": "C",
+            "animal": 1
+        },
+        {
+            "index": 200,
+            "type": 1,
+            "file": "200.json",
+            "length": 3,
+            "collect": "C",
+            "goal": "A"
+        },
+        {
+            "index": 201,
+            "type": 1,
+            "file": "201.json",
+            "length": 3,
+            "collect": "CA",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "CAT",
+            "nextAnimal": 2
+        },
+        {
+            "index": 202,
+            "type": 1,
+            "file": "202.json",
+            "length": 3,
+            "collect": "",
+            "goal": "F",
+            "animal": 2
+        },
+        {
+            "index": 203,
+            "type": 1,
+            "file": "203.json",
+            "length": 3,
+            "collect": "F",
+            "goal": "O"
+        },
+        {
+            "index": 204,
+            "type": 1,
+            "file": "204.json",
+            "length": 3,
+            "collect": "FO",
+            "goal": "X",
+            "complete": true,
+            "nameAnimal": "FOX",
+            "nextAnimal": 3
+        },
+        {
+            "index": 205,
+            "type": 1,
+            "file": "205.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 3
+        },
+        {
+            "index": 206,
+            "type": 1,
+            "file": "206.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "I"
+        },
+        {
+            "index": 207,
+            "type": 1,
+            "file": "207.json",
+            "length": 4,
+            "collect": "BI",
+            "goal": "R"
+        },
+        {
+            "index": 208,
+            "type": 1,
+            "file": "208.json",
+            "length": 4,
+            "collect": "BIR",
+            "goal": "D",
+            "complete": true,
+            "nameAnimal": "BIRD",
+            "nextAnimal": 4
+        },
+        {
+            "index": 209,
+            "type": 1,
+            "file": "209.json",
+            "length": 4,
+            "collect": "",
+            "goal": "W",
+            "animal": 4
+        },
+        {
+            "index": 210,
+            "type": 1,
+            "file": "210.json",
+            "length": 4,
+            "collect": "W",
+            "goal": "O"
+        },
+        {
+            "index": 211,
+            "type": 1,
+            "file": "211.json",
+            "length": 4,
+            "collect": "WO",
+            "goal": "L"
+        },
+        {
+            "index": 212,
+            "type": 1,
+            "file": "212.json",
+            "length": 4,
+            "collect": "WOL",
+            "goal": "F",
+            "complete": true,
+            "nameAnimal": "WOLF",
+            "nextAnimal": 5
+        },
+        {
+            "index": 213,
+            "type": 1,
+            "file": "213.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 5
+        },
+        {
+            "index": 214,
+            "type": 1,
+            "file": "214.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "E"
+        },
+        {
+            "index": 215,
+            "type": 1,
+            "file": "215.json",
+            "length": 4,
+            "collect": "DE",
+            "goal": "A"
+        },
+        {
+            "index": 216,
+            "type": 1,
+            "file": "216.json",
+            "length": 4,
+            "collect": "DEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "DEAR",
+            "nextAnimal": 6
+        },
+        {
+            "index": 217,
+            "type": 1,
+            "file": "217.json",
+            "length": 4,
+            "collect": "",
+            "goal": "D",
+            "animal": 6
+        },
+        {
+            "index": 218,
+            "type": 1,
+            "file": "218.json",
+            "length": 4,
+            "collect": "D",
+            "goal": "U"
+        },
+        {
+            "index": 219,
+            "type": 1,
+            "file": "219.json",
+            "length": 4,
+            "collect": "DU",
+            "goal": "C"
+        },
+        {
+            "index": 220,
+            "type": 1,
+            "file": "220.json",
+            "length": 4,
+            "collect": "DUC",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "DUCK",
+            "nextAnimal": 7
+        },
+        {
+            "index": 221,
+            "type": 1,
+            "file": "221.json",
+            "length": 4,
+            "collect": "",
+            "goal": "B",
+            "animal": 7
+        },
+        {
+            "index": 222,
+            "type": 1,
+            "file": "222.json",
+            "length": 4,
+            "collect": "B",
+            "goal": "E"
+        },
+        {
+            "index": 223,
+            "type": 1,
+            "file": "223.json",
+            "length": 4,
+            "collect": "BE",
+            "goal": "A"
+        },
+        {
+            "index": 224,
+            "type": 1,
+            "file": "224.json",
+            "length": 4,
+            "collect": "BEA",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "BEAR",
+            "nextAnimal": 8
+        },
+        {
+            "index": 225,
+            "type": 1,
+            "file": "225.json",
+            "length": 5,
+            "collect": "",
+            "goal": "M",
+            "animal": 8
+        },
+        {
+            "index": 226,
+            "type": 1,
+            "file": "226.json",
+            "length": 5,
+            "collect": "M",
+            "goal": "O"
+        },
+        {
+            "index": 227,
+            "type": 1,
+            "file": "227.json",
+            "length": 5,
+            "collect": "MO",
+            "goal": "U"
+        },
+        {
+            "index": 228,
+            "type": 1,
+            "file": "228.json",
+            "length": 5,
+            "collect": "MOU",
+            "goal": "S"
+        },
+        {
+            "index": 229,
+            "type": 1,
+            "file": "229.json",
+            "length": 5,
+            "collect": "MOUS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "MOUSE",
+            "nextAnimal": 9
+        },
+        {
+            "index": 230,
+            "type": 1,
+            "file": "230.json",
+            "length": 5,
+            "collect": "",
+            "goal": "H",
+            "animal": 9
+        },
+        {
+            "index": 231,
+            "type": 1,
+            "file": "231.json",
+            "length": 5,
+            "collect": "H",
+            "goal": "O"
+        },
+        {
+            "index": 232,
+            "type": 1,
+            "file": "232.json",
+            "length": 5,
+            "collect": "HO",
+            "goal": "R"
+        },
+        {
+            "index": 233,
+            "type": 1,
+            "file": "233.json",
+            "length": 5,
+            "collect": "HOR",
+            "goal": "S"
+        },
+        {
+            "index": 234,
+            "type": 1,
+            "file": "234.json",
+            "length": 5,
+            "collect": "HORS",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "HORSE",
+            "nextAnimal": 10
+        },
+        {
+            "index": 235,
+            "type": 1,
+            "file": "235.json",
+            "length": 5,
+            "collect": "",
+            "goal": "S",
+            "animal": 10
+        },
+        {
+            "index": 236,
+            "type": 1,
+            "file": "236.json",
+            "length": 5,
+            "collect": "S",
+            "goal": "H"
+        },
+        {
+            "index": 237,
+            "type": 1,
+            "file": "237.json",
+            "length": 5,
+            "collect": "SH",
+            "goal": "A"
+        },
+        {
+            "index": 238,
+            "type": 1,
+            "file": "238.json",
+            "length": 5,
+            "collect": "SHA",
+            "goal": "R"
+        },
+        {
+            "index": 239,
+            "type": 1,
+            "file": "239.json",
+            "length": 5,
+            "collect": "SHAR",
+            "goal": "K",
+            "complete": true,
+            "nameAnimal": "SHARK",
+            "nextAnimal": 11
+        },
+        {
+            "index": 240,
+            "type": 1,
+            "file": "240.json",
+            "length": 5,
+            "collect": "",
+            "goal": "T",
+            "animal": 11
+        },
+        {
+            "index": 241,
+            "type": 1,
+            "file": "241.json",
+            "length": 5,
+            "collect": "T",
+            "goal": "I"
+        },
+        {
+            "index": 242,
+            "type": 1,
+            "file": "242.json",
+            "length": 5,
+            "collect": "TI",
+            "goal": "G"
+        },
+        {
+            "index": 243,
+            "type": 1,
+            "file": "243.json",
+            "length": 5,
+            "collect": "TIG",
+            "goal": "E"
+        },
+        {
+            "index": 244,
+            "type": 1,
+            "file": "244.json",
+            "length": 5,
+            "collect": "TIGE",
+            "goal": "R",
+            "complete": true,
+            "nameAnimal": "TIGER",
+            "nextAnimal": 12
+        },
+        {
+            "index": 245,
+            "type": 1,
+            "file": "245.json",
+            "length": 6,
+            "collect": "",
+            "goal": "R",
+            "animal": 12
+        },
+        {
+            "index": 246,
+            "type": 1,
+            "file": "246.json",
+            "length": 6,
+            "collect": "R",
+            "goal": "A"
+        },
+        {
+            "index": 247,
+            "type": 1,
+            "file": "247.json",
+            "length": 6,
+            "collect": "RA",
+            "goal": "B"
+        },
+        {
+            "index": 248,
+            "type": 1,
+            "file": "248.json",
+            "length": 6,
+            "collect": "RAB",
+            "goal": "B"
+        },
+        {
+            "index": 249,
+            "type": 1,
+            "file": "249.json",
+            "length": 6,
+            "collect": "RABB",
+            "goal": "I"
+        },
+        {
+            "index": 250,
+            "type": 1,
+            "file": "250.json",
+            "length": 6,
+            "collect": "RABBI",
+            "goal": "T",
+            "complete": true,
+            "nameAnimal": "RABBIT",
+            "nextAnimal": 13
+        },
+        {
+            "index": 251,
+            "type": 1,
+            "file": "251.json",
+            "length": 6,
+            "collect": "",
+            "goal": "T",
+            "animal": 13
+        },
+        {
+            "index": 252,
+            "type": 1,
+            "file": "252.json",
+            "length": 6,
+            "collect": "T",
+            "goal": "U"
+        },
+        {
+            "index": 253,
+            "type": 1,
+            "file": "253.json",
+            "length": 6,
+            "collect": "TU",
+            "goal": "R"
+        },
+        {
+            "index": 254,
+            "type": 1,
+            "file": "254.json",
+            "length": 6,
+            "collect": "TUR",
+            "goal": "T"
+        },
+        {
+            "index": 255,
+            "type": 1,
+            "file": "255.json",
+            "length": 6,
+            "collect": "TURT",
+            "goal": "L"
+        },
+        {
+            "index": 256,
+            "type": 1,
+            "file": "256.json",
+            "length": 6,
+            "collect": "TURTL",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "TURTLE",
+            "nextAnimal": 14
+        },
+        {
+            "index": 257,
+            "type": 1,
+            "file": "257.json",
+            "length": 5,
+            "collect": "",
+            "goal": "H",
+            "animal": 14
+        },
+        {
+            "index": 258,
+            "type": 1,
+            "file": "258.json",
+            "length": 5,
+            "collect": "H",
+            "goal": "I"
+        },
+        {
+            "index": 259,
+            "type": 1,
+            "file": "259.json",
+            "length": 5,
+            "collect": "HI",
+            "goal": "P"
+        },
+        {
+            "index": 260,
+            "type": 1,
+            "file": "260.json",
+            "length": 5,
+            "collect": "HIP",
+            "goal": "P"
+        },
+        {
+            "index": 261,
+            "type": 1,
+            "file": "261.json",
+            "length": 5,
+            "collect": "HIPP",
+            "goal": "O",
+            "complete": true,
+            "nameAnimal": "HIPPO",
+            "nextAnimal": 27
+        },
+        {
+            "index": 262,
+            "type": 1,
+            "file": "262.json",
+            "length": 5,
+            "collect": "",
+            "goal": "S",
+            "animal": 27
+        },
+        {
+            "index": 263,
+            "type": 1,
+            "file": "263.json",
+            "length": 5,
+            "collect": "S",
+            "goal": "L"
+        },
+        {
+            "index": 264,
+            "type": 1,
+            "file": "264.json",
+            "length": 5,
+            "collect": "SL",
+            "goal": "O"
+        },
+        {
+            "index": 265,
+            "type": 1,
+            "file": "265.json",
+            "length": 5,
+            "collect": "SLO",
+            "goal": "T"
+        },
+        {
+            "index": 266,
+            "type": 1,
+            "file": "266.json",
+            "length": 5,
+            "collect": "SLOT",
+            "goal": "H",
+            "complete": true,
+            "nameAnimal": "SLOTH",
+            "nextAnimal": 28
+        },
+        {
+            "index": 267,
+            "type": 1,
+            "file": "267.json",
+            "length": 6,
+            "collect": "",
+            "goal": "M",
+            "animal": 28
+        },
+        {
+            "index": 268,
+            "type": 1,
+            "file": "268.json",
+            "length": 6,
+            "collect": "M",
+            "goal": "O"
+        },
+        {
+            "index": 269,
+            "type": 1,
+            "file": "269.json",
+            "length": 6,
+            "collect": "MO",
+            "goal": "N"
+        },
+        {
+            "index": 270,
+            "type": 1,
+            "file": "270.json",
+            "length": 6,
+            "collect": "MON",
+            "goal": "K"
+        },
+        {
+            "index": 271,
+            "type": 1,
+            "file": "271.json",
+            "length": 6,
+            "collect": "MONK",
+            "goal": "E"
+        },
+        {
+            "index": 272,
+            "type": 1,
+            "file": "272.json",
+            "length": 6,
+            "collect": "MONKE",
+            "goal": "Y",
+            "complete": true,
+            "nameAnimal": "MONKEY",
+            "nextAnimal": 29
+        },
+        {
+            "index": 273,
+            "type": 1,
+            "file": "273.json",
+            "length": 7,
+            "collect": "",
+            "goal": "G",
+            "animal": 29
+        },
+        {
+            "index": 274,
+            "type": 1,
+            "file": "274.json",
+            "length": 7,
+            "collect": "G",
+            "goal": "I"
+        },
+        {
+            "index": 275,
+            "type": 1,
+            "file": "275.json",
+            "length": 7,
+            "collect": "GI",
+            "goal": "R"
+        },
+        {
+            "index": 276,
+            "type": 1,
+            "file": "276.json",
+            "length": 7,
+            "collect": "GIR",
+            "goal": "A"
+        },
+        {
+            "index": 277,
+            "type": 1,
+            "file": "277.json",
+            "length": 7,
+            "collect": "GIRA",
+            "goal": "F"
+        },
+        {
+            "index": 278,
+            "type": 1,
+            "file": "278.json",
+            "length": 7,
+            "collect": "GIRAF",
+            "goal": "F"
+        },
+        {
+            "index": 279,
+            "type": 1,
+            "file": "279.json",
+            "length": 7,
+            "collect": "GIRAFF",
+            "goal": "E",
+            "complete": true,
+            "nameAnimal": "GIRAFFE",
+            "nextAnimal": 30
+        },
+        {
+            "index": 280,
+            "type": 1,
+            "file": "280.json",
+            "length": 8,
+            "collect": "",
+            "goal": "K",
+            "animal": 30
+        },
+        {
+            "index": 281,
+            "type": 1,
+            "file": "281.json",
+            "length": 8,
+            "collect": "K",
+            "goal": "A"
+        },
+        {
+            "index": 282,
+            "type": 1,
+            "file": "282.json",
+            "length": 8,
+            "collect": "KA",
+            "goal": "N"
+        },
+        {
+            "index": 283,
+            "type": 1,
+            "file": "283.json",
+            "length": 8,
+            "collect": "KAN",
+            "goal": "G"
+        },
+        {
+            "index": 284,
+            "type": 1,
+            "file": "284.json",
+            "length": 8,
+            "collect": "KANG",
+            "goal": "A"
+        },
+        {
+            "index": 285,
+            "type": 1,
+            "file": "285.json",
+            "length": 8,
+            "collect": "KANGA",
+            "goal": "R"
+        },
+        {
+            "index": 286,
+            "type": 1,
+            "file": "286.json",
+            "length": 8,
+            "collect": "KANGAR",
+            "goal": "O"
+        },
+        {
+            "index": 287,
+            "type": 1,
+            "file": "287.json",
+            "length": 8,
+            "collect": "KANGARO",
+            "goal": "O",
+            "complete": true,
+            "nameAnimal": "KANGAROO",
+            "nextAnimal": 31
+        },
+        {
+            "index": 288,
+            "type": 1,
+            "file": "288.json",
+            "length": 3,
+            "collect": "",
+            "goal": "O",
+            "animal": 31
+        },
+        {
+            "index": 289,
+            "type": 1,
+            "file": "289.json",
+            "length": 3,
+            "collect": "O",
+            "goal": "W"
+        },
+        {
+            "index": 290,
+            "type": 1,
+            "file": "290.json",
+            "length": 3,
+            "collect": "OW",
+            "goal": "L",
+            "complete": true,
+            "nameAnimal": "OWL",
+            "nextAnimal": 32
+        }
+    ]
+}

@@ -183,3 +183,13 @@ temp/
 # external libs zip
 *.zip
 **/simulator/
+
+# sdkbox
+proj.ios_mac/Firebase/
+proj.ios_mac/GoogleMobileAds.framework/
+proj.ios_mac/PluginAdMob.framework/
+proj.ios_mac/PluginAppnext.framework/
+proj.ios_mac/PluginFirebase.framework/
+proj.ios_mac/PluginGoogleAnalytics.framework/
+proj.ios_mac/PluginSdkboxAds.framework/
+proj.ios_mac/sdkbox.framework/

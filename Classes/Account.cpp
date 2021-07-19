@@ -19,6 +19,7 @@ static const char* KEY_LEVEL = "level";
 static const char* KEY_HINT = "hint";
 static const char* KEY_MUTE = "mute";
 static const char* KEY_LOGIN = "login";
+static const char* KEY_NOADS = "noads";
 
 static const int    MAX_LEVEL = 200;
 
@@ -58,7 +59,9 @@ void Account::init() {
         level = 1;
         hint = 2;
         isMute = false;
+        isNoAds = false;
         
+        //lastlogin은 하루에 한 번 접속 시 아이템을 지급하기 위해 쓰이므로 날짜만 필요하다.
         time_t t = time(NULL);
         struct tm* t2 = localtime(&t);
         lastlogin = t2->tm_mday;
@@ -91,6 +94,7 @@ void Account::init() {
         hint = UserDefault::getInstance()->getIntegerForKey(KEY_HINT, 2);
         isMute = UserDefault::getInstance()->getBoolForKey(KEY_MUTE, false);
         lastlogin = UserDefault::getInstance()->getIntegerForKey(KEY_LOGIN, today);
+        isNoAds = UserDefault::getInstance()->getIntegerForKey(KEY_NOADS, false);
         
         char buf[32];
         auto stageMgr = StageManager::getInstance();
@@ -121,6 +125,7 @@ void Account::sync() {
     UserDefault::getInstance()->setIntegerForKey(KEY_HINT, hint);
     UserDefault::getInstance()->setBoolForKey(KEY_MUTE, isMute);
     UserDefault::getInstance()->setIntegerForKey(KEY_LOGIN, lastlogin);
+    UserDefault::getInstance()->setIntegerForKey(KEY_NOADS, isNoAds);
     
     char buf[32];
     auto stageMgr = StageManager::getInstance();
@@ -151,6 +156,7 @@ void Account::updateStates() {
             classicCount = count;
             stateCategory[i] = OPEN;
         }
+        //클래식타입 스테이지를 어디까지 클리어했냐에 따라 다른 타입의 오픈이 결정 됨
         else if(i == 1) stateCategory[i] = 13 <= classicCount ? OPEN : LOCK;
         else if(i == 2) stateCategory[i] = 195 <= classicCount ? OPEN : LOCK;
         else if(i == 3) stateCategory[i] = 290 <= classicCount ? OPEN : LOCK;
@@ -170,6 +176,22 @@ void Account::setStageState(int category, int idx, int state) {
         return;
     
     vecStageState[category][idx] = state;
+}
+
+bool Account::isUnlockAll(int category) {
+    if(4 <= category)
+        return false;
+    
+    bool ret = true;
+    int size = (unsigned int)vecStageState[category].size();
+    for(int i = 0; i < size; i++) {
+        if(vecStageState[category][i] == LOCK) {
+            ret = false;
+            break;
+        }
+    }
+    
+    return ret;
 }
 
 void Account::unlockAll(int category) {

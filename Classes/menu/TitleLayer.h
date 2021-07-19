@@ -10,9 +10,11 @@
 
 #include "Common.h"
 
+//타이틀 화면의 씬과 레이어
 class TitleLayer : public Layer
 {
 public:
+    //씬을 따로 구현 안하고 빈 씬에 레이어를 붙이는 식으로 구현
     static Scene* createScene();
     
     virtual bool init() override;

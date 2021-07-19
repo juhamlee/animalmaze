@@ -24,9 +24,13 @@ public:
     virtual bool onTouchBegan(Touch* touch, Event* event) override;
     virtual void update(float dt) override;
     
+    void onClose(EventCustom* event);
+    
     void close(float);
 public:
     EventListenerTouchOneByOne* listener;
+    EventListenerCustom* customListener;
+    
     Sprite* sprPopup;
     
     // implement the "static create()" method manually

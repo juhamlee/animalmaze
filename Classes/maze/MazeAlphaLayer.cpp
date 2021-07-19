@@ -21,7 +21,6 @@ static const int FONT_SIZE_HINT = 28;
 static const int FONT_SIZE_STAGE = 50;
 
 static const float SPEED_MOVE = 0.13f;
-static const float SPEED_GHOST = 450.f;
 
 static const int BG_SIZE = 7;
 static const int BG_OFFSETS[] = {
@@ -117,7 +116,8 @@ Scene* MazeAlphaLayer::createScene()
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
         
-        PopupManager::getInstance()->initWithBaseNode(layer);
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
         
         return scene;
     }
@@ -287,10 +287,12 @@ void MazeAlphaLayer::onEnter() {
     listener->onTouchMoved = CC_CALLBACK_2(MazeAlphaLayer::onTouchMoved, this);
     
     customListener = EventListenerCustom::create(E_USE_HINT, CC_CALLBACK_1(MazeAlphaLayer::onUseHint, this));
+    refreshListener = EventListenerCustom::create(E_REFRESH_HINT, CC_CALLBACK_1(MazeAlphaLayer::onRefreshHint, this));
     finishListener = EventListenerCustom::create(E_AD_VIDEO_CLOSE, CC_CALLBACK_1(MazeAlphaLayer::onFinish, this));
     
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(listener, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(customListener, this);
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(refreshListener, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(finishListener, this);
     
     string filepath = "";
@@ -402,15 +404,20 @@ void MazeAlphaLayer::onEnter() {
     
     scheduleUpdate();
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void MazeAlphaLayer::onExit() {
     EVENT_DISPATCHER->removeEventListener(listener);
     EVENT_DISPATCHER->removeEventListener(customListener);
+    EVENT_DISPATCHER->removeEventListener(refreshListener);
     EVENT_DISPATCHER->removeEventListener(finishListener);
     
     Layer::onExit();
@@ -457,12 +464,11 @@ void MazeAlphaLayer::onTouchMoved(Touch* touch, Event* event) {
 void MazeAlphaLayer::update(float dt) {
     if(state == MOVE) {
         pathTrace->setExtraPoint(player->getPosition());
-        log("EXTRA! %.0f %.0f", player->getPosition().x, player->getPosition().y);
     }
     
     if(follower && player) {
         float offset = 100.f * fScale;
-        int size = vecFollow.size();
+        int size = (unsigned int)vecFollow.size();
         for(int i = size; 0 < i; i--) {
             Vec2 prev;
             Vec2 next = vecFollow[i - 1];
@@ -516,7 +522,19 @@ void MazeAlphaLayer::onUseHint(EventCustom* event) {
     }
 }
 
+void MazeAlphaLayer::onRefreshHint(EventCustom* event) {
+    int hint = ACCOUNT->hint;
+    
+    char buf[16];
+    sprintf(buf, "%d", hint);
+    labHint->setString(buf);
+}
+
 void MazeAlphaLayer::onFinish(EventCustom* event) {
+    if(ACCOUNT->isNoAds == false) {
+        sdkbox::PluginAppnext::refreshVideo("fullscreen");
+    }
+    
     AUDIO->resumeBackgroundMusic();
     scheduleOnce(schedule_selector(MazeLayer::finish), 0.1f);
 }
@@ -524,7 +542,7 @@ void MazeAlphaLayer::onFinish(EventCustom* event) {
 void MazeAlphaLayer::callbackPause(Ref* pSender) {
     auto popup = PausePopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");
@@ -541,7 +559,7 @@ void MazeAlphaLayer::callbackRetry(Ref* pSender) {
 void MazeAlphaLayer::callbackHint(Ref* pSender) {
     auto popup = HintPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");
@@ -666,13 +684,18 @@ void MazeAlphaLayer::clear() {
     ACCOUNT->ads_count++;
     int count = ACCOUNT->ads_count;
     
-    if(120 <= elapsed || 4 <= count) {
-        if(sdkbox::PluginAppnext::isVideoReady("fullscreen")) {
-            ACCOUNT->ads_time = current;
-            ACCOUNT->ads_count = 0;
-            
-            sdkbox::PluginAppnext::showVideo("fullscreen");
-            AUDIO->pauseBackgroundMusic();
+    if(ACCOUNT->isNoAds == false) {
+        if(120 <= elapsed || 4 <= count) {
+            if(sdkbox::PluginAppnext::isVideoReady("fullscreen")) {
+                ACCOUNT->ads_time = current;
+                ACCOUNT->ads_count = 0;
+                
+                sdkbox::PluginAppnext::showVideo("fullscreen");
+                AUDIO->pauseBackgroundMusic();
+            }
+            else {
+                finish();
+            }
         }
         else {
             finish();
@@ -693,13 +716,13 @@ void MazeAlphaLayer::finish(float dt) {
         CollectPopup::strCollect = name;
         auto popup = CollectPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
     }
     else {
         auto popup = ClearPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
     }
     

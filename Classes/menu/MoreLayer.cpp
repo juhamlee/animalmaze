@@ -45,7 +45,8 @@ Scene* MoreLayer::createScene()
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
         
-        PopupManager::getInstance()->initWithBaseNode(layer);
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
         
         return scene;
     }
@@ -185,10 +186,14 @@ void MoreLayer::onEnter() {
     keyListener->onKeyReleased = CC_CALLBACK_2(MoreLayer::onKeyReleased, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void MoreLayer::onExit() {

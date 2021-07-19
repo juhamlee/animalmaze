@@ -50,6 +50,9 @@ Scene* CategoryLayer::createScene()
     
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
+        
+        ScreenLog::getInstance()->attachToScene( scene );
+        
         return scene;
     }
     
@@ -298,10 +301,14 @@ void CategoryLayer::onEnter() {
     keyListener->onKeyReleased = CC_CALLBACK_2(CategoryLayer::onKeyReleased, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void CategoryLayer::onExit() {

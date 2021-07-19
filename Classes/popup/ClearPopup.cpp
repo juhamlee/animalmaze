@@ -12,8 +12,6 @@
 #include "ViewPopup.h"
 #include "PopupManager.h"
 
-#include "PluginAdMob/PluginAdMob.h"
-
 static const int FONT_SIZE_LEVEL = 30;
 static const int FONT_SIZE_TEXT = 70;
 static const Size POPUP_SIZE = Size(569, 325);
@@ -288,7 +286,7 @@ void ClearPopup::callbackLike(Ref* pSender) {
 void ClearPopup::callbackView(Ref* pSender) {
     auto popup = ViewPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");

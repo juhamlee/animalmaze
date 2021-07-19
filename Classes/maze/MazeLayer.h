@@ -46,6 +46,7 @@ public:
     virtual void update(float dt) override;
     
     void onUseHint(EventCustom* event);
+    void onRefreshHint(EventCustom* event);
     void onFinish(EventCustom* event);
     void callbackPause(Ref* pSender);
     void callbackRetry(Ref* pSender);
@@ -68,6 +69,7 @@ public:
 public:
     EventListenerTouchOneByOne* listener;
     EventListenerCustom* customListener;
+    EventListenerCustom* refreshListener;
     EventListenerCustom* finishListener;
     
     int state;
@@ -93,7 +95,8 @@ public:
     Vec2 touchOrigin;
     
     bool isFollow;
-    bool isHintUsed;
+    int  hintLimit;
+    int  hintUsed;
     
     float fScale;
     Vec2 vScale;

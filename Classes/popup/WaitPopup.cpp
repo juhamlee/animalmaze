@@ -49,15 +49,18 @@ void WaitPopup::onEnter() {
     listener->setSwallowTouches(true);
     listener->onTouchBegan = CC_CALLBACK_2(WaitPopup::onTouchBegan, this);
     
+    customListener = EventListenerCustom::create(E_CLOSE_WAIT, CC_CALLBACK_1(WaitPopup::onClose, this));
+    INFO("wait close");
+    
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(listener, this);
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(customListener, this);
     
     scheduleUpdate();
-    
-    scheduleOnce(schedule_selector(WaitPopup::close), 0.5f);
 }
 
 void WaitPopup::onExit() {
     EVENT_DISPATCHER->removeEventListener(listener);
+    EVENT_DISPATCHER->removeEventListener(customListener);
     
     Layer::onExit();
 }
@@ -70,8 +73,12 @@ void WaitPopup::update(float dt) {
     
 }
 
+void WaitPopup::onClose(EventCustom* event) {
+    close(0);
+}
+
 void WaitPopup::close(float dt) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }

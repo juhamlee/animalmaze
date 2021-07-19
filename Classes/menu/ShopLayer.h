@@ -50,8 +50,11 @@ public:
     void callbackBuy(Ref* pSender);
     void callbackRestore(Ref* pSender);
     
+    void onReload(EventCustom* event);
+    
 public:
     EventListenerKeyboard* keyListener;
+    EventListenerCustom* customListener;
     Sprite* sprVolume;
     
     // implement the "static create()" method manually

@@ -12,6 +12,7 @@
 #include "WaitPopup.h"
 
 #include "PluginAdMob/PluginAdMob.h"
+#include "PluginIAP/PluginIAP.h"
 
 static const int FONT_SIZE_LEVEL = 30;
 static const int FONT_SIZE_HINT = 30;
@@ -52,7 +53,8 @@ Scene* ShopLayer::createScene()
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
         
-        PopupManager::getInstance()->initWithBaseNode(layer);
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
         
         return scene;
     }
@@ -180,6 +182,9 @@ bool ShopLayer::init()
             btn->setPosition(Vec2(center.x, BTN_Y + BTN_Y_OFFSET * i));
             this->addChild(btn, 0);
             
+            if(i == 0 && ACCOUNT->isNoAds == true)
+                btn->setEnabled(false);
+            
             int offset_y = BTN_SIZE.height * 0.5f;
             
             //badge
@@ -257,11 +262,11 @@ bool ShopLayer::init()
     auto btnRestore = Button::create("ui/board_item.png");
     if(btnRestore != nullptr) {
         btnRestore->setScale9Enabled(true);
-        btnRestore->setColor(RESTORE_COLOR_OFF);
+        btnRestore->setColor(RESTORE_COLOR_ON);
         btnRestore->setContentSize(RESTORE_SIZE);
         btnRestore->addClickEventListener(CC_CALLBACK_1(ShopLayer::callbackRestore, this));
         btnRestore->setPosition(Vec2(center.x, RESTORE_Y));
-        btnRestore->setEnabled(false);
+        btnRestore->setEnabled(true);
         this->addChild(btnRestore, 0);
         
         auto labText = Label::createWithTTF("RESTORE PURCHASE", FONT_PATH, FONT_SIZE_TEXT);
@@ -279,16 +284,25 @@ void ShopLayer::onEnter() {
     
     keyListener = EventListenerKeyboard::create();
     keyListener->onKeyReleased = CC_CALLBACK_2(ShopLayer::onKeyReleased, this);
-    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    customListener = EventListenerCustom::create(E_RELOAD_SCENE, CC_CALLBACK_1(ShopLayer::onReload, this));
+    
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(customListener, this);
+    
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void ShopLayer::onExit() {
     EVENT_DISPATCHER->removeEventListener(keyListener);
+    EVENT_DISPATCHER->removeEventListener(customListener);
     
     Layer::onExit();
 }
@@ -340,14 +354,36 @@ void ShopLayer::callbackVolume(Ref* pSender) {
 void ShopLayer::callbackBuy(Ref* pSender) {
     auto popup = WaitPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup, true);
     }
     
     AUDIO->playEffect("sfx/click.mp3");
     
-    ACCOUNT->hint += 30;
+    Node* p = (Node*)pSender;
+    if(p) {
+        int tag = p->getTag();
+        
+        if(tag == 0)
+            sdkbox::IAP::purchase(SKU_NO_ADS);
+        else if(tag == 1)
+            sdkbox::IAP::purchase(SKU_HINT_5);
+        else if(tag == 2)
+            sdkbox::IAP::purchase(SKU_HINT_25);
+        else if(tag == 3)
+            sdkbox::IAP::purchase(SKU_HINT_100);
+        else if(tag == 4)
+            sdkbox::IAP::purchase(SKU_HINT_250);
+    }
 }
 
 void ShopLayer::callbackRestore(Ref* pSender) {
     AUDIO->playEffect("sfx/click.mp3");
+    
+    sdkbox::IAP::restore();
+}
+
+void ShopLayer::onReload(EventCustom *event) {
+    auto scene = ShopLayer::createScene();
+    auto director = Director::getInstance();
+    director->replaceScene(scene);
 }

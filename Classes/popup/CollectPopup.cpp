@@ -99,13 +99,13 @@ void CollectPopup::update(float dt) {
 }
 
 void CollectPopup::callbackOk(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
     
     auto popup = ClearPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
 }
 

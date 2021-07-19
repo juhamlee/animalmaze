@@ -25,6 +25,16 @@
 #include "AppDelegate.h"
 #include "LogoLayer.h"
 #include "AppnextAds.h"
+#include "IAPHandler.h"
+#include "PlayHandler.h"
+#include "PluginAppnext/PluginAppnext.h"
+#include "PluginAdMob/PluginAdMob.h"
+#include "PluginIAP/PluginIAP.h"
+#include "PluginGoogleAnalytics/PluginGoogleAnalytics.h"
+#include "PluginFirebase/PluginFirebase.h"
+#include "PluginSdkboxPlay/PluginSdkboxPlay.h"
+#include "PluginSdkboxAds/PluginSdkboxAds.h"
+#include "ScreenLog.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -40,12 +50,6 @@ using namespace cocos2d::experimental;
 #include "audio/include/SimpleAudioEngine.h"
 using namespace CocosDenshion;
 #endif
-
-#include "PluginFirebase/PluginFirebase.h"
-#include "PluginGoogleAnalytics/PluginGoogleAnalytics.h"
-#include "PluginSdkboxAds/PluginSdkboxAds.h"
-#include "PluginAdMob/PluginAdMob.h"
-#include "PluginAppnext/PluginAppnext.h"
 
 USING_NS_CC;
 
@@ -82,21 +86,26 @@ static int register_all_packages()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-    //SDKBOX Plugins
-    sdkbox::Firebase::Analytics::init();
+    //sdkbox
     sdkbox::PluginGoogleAnalytics::init();
+    sdkbox::Firebase::Analytics::init();
+    
     sdkbox::PluginSdkboxAds::init();
     sdkbox::PluginAdMob::init();
+    sdkbox::PluginAppnext::setListener(AppnextAds::getInstance());
     sdkbox::PluginAppnext::init();
     
-    //Ads Cache
-    sdkbox::PluginAdMob::cache("home");
-    sdkbox::PluginAdMob::cache("gameover");
-    sdkbox::PluginAppnext::cacheAd("default");
-    sdkbox::PluginAppnext::cacheVideo("fullscreen");
+    sdkbox::IAP::setListener(IAPHandler::getInstance());
+    sdkbox::IAP::init();
     
-    //Ads Listener
-    sdkbox::PluginAppnext::setListener(AppnextAds::getInstance());
+    sdkbox::PluginSdkboxPlay::setListener(PlayHandler::getInstance());
+    sdkbox::PluginSdkboxPlay::init();
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    if (!sdkbox::PluginSdkboxPlay::isSignedIn()) {
+        sdkbox::PluginSdkboxPlay::signin();
+    }
+#endif
     
     // initialize director
     auto director = Director::getInstance();
@@ -112,23 +121,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // turn on display FPS
     //director->setDisplayStats(true);
-
+    
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
-
+    
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::SHOW_ALL);
     director->setContentScaleFactor(1.f);
-
+    
     register_all_packages();
     dataLoading();
-
+    
     // create a scene. it's an autorelease object
     auto scene = LogoLayer::createScene();
-
+    
     // run
     director->runWithScene(scene);
-
+    
     return true;
 }
 

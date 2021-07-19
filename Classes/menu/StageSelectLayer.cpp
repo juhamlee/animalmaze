@@ -9,8 +9,11 @@
 #include "TitleLayer.h"
 #include "MazeLayer.h"
 #include "MazeAlphaLayer.h"
+#include "WaitPopup.h"
+#include "PopupManager.h"
 
 #include "PluginAdMob/PluginAdMob.h"
+#include "PluginIAP/PluginIAP.h"
 
 static const int FONT_SIZE_LEVEL = 30;
 static const int FONT_SIZE_TEXT = 50;
@@ -45,6 +48,10 @@ Scene* StageSelectLayer::createScene(int category)
     
     if(scene != nullptr && layer != nullptr) {
         layer->category = category;
+        
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
+        
         scene->addChild(layer);
         return scene;
     }
@@ -64,7 +71,11 @@ void StageSelectLayer::onEnter() {
     
     keyListener = EventListenerKeyboard::create();
     keyListener->onKeyReleased = CC_CALLBACK_2(StageSelectLayer::onKeyReleased, this);
+    
+    customListener = EventListenerCustom::create(E_RELOAD_SCENE, CC_CALLBACK_1(StageSelectLayer::onReload, this));
+    
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(customListener, this);
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -102,6 +113,12 @@ void StageSelectLayer::onEnter() {
         if(sprIcon != nullptr) {
             sprIcon->setPosition(btnUnlock->getPosition() + Vec2(0, -8));
             this->addChild(sprIcon, 3);
+        }
+        
+        if(ACCOUNT->isUnlockAll(category)) {
+            btnUnlock->setVisible(false);
+            if(sprIcon != nullptr)
+                sprIcon->setVisible(false);
         }
     }
     
@@ -203,10 +220,14 @@ void StageSelectLayer::onEnter() {
         }
     }
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void StageSelectLayer::callbackTitle(Ref* pSender) {
@@ -218,16 +239,21 @@ void StageSelectLayer::callbackTitle(Ref* pSender) {
 }
 
 void StageSelectLayer::callbackUnlock(Ref* pSender) {
+    auto popup = WaitPopup::create();
+    if(popup != nullptr) {
+        POPUP_MANAGER->addPopup(popup, true);
+    }
+    
     AUDIO->playEffect("sfx/click.mp3");
     
-    ACCOUNT->unlockAll(0);
-    ACCOUNT->unlockAll(1);
-    ACCOUNT->unlockAll(2);
-    ACCOUNT->unlockAll(3);
-    
-    auto scene = StageSelectLayer::createScene(this->category);
-    auto director = Director::getInstance();
-    director->replaceScene(scene);
+    if(category == 0)
+        sdkbox::IAP::purchase(SKU_UNLOCK1);
+    else if(category == 1)
+        sdkbox::IAP::purchase(SKU_UNLOCK2);
+    else if(category == 2)
+        sdkbox::IAP::purchase(SKU_UNLOCK3);
+    else if(category == 3)
+        sdkbox::IAP::purchase(SKU_UNLOCK4);
 }
 
 void StageSelectLayer::callbackSelect(Ref* pSender) {
@@ -258,6 +284,7 @@ void StageSelectLayer::callbackSelect(Ref* pSender) {
 
 void StageSelectLayer::onExit() {
     EVENT_DISPATCHER->removeEventListener(keyListener);
+    EVENT_DISPATCHER->removeEventListener(customListener);
     
     Layer::onExit();
 }
@@ -270,4 +297,10 @@ void StageSelectLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event *even
         
         AUDIO->playEffect("sfx/click.mp3");
     }
+}
+
+void StageSelectLayer::onReload(EventCustom *event) {
+    auto scene = StageSelectLayer::createScene(this->category);
+    auto director = Director::getInstance();
+    director->replaceScene(scene);
 }

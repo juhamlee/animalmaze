@@ -26,6 +26,7 @@ static const Color3B BTN_COLORS[5] = {
     Color3B(226, 178, 47)
 };
 
+//씬 생성과 동시에 해당 클래스(레이어)를 붙여서 반환하는 식으로 씬을 생성한다
 Scene* TitleLayer::createScene()
 {
     auto scene = Scene::create();
@@ -34,7 +35,9 @@ Scene* TitleLayer::createScene()
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
         
-        PopupManager::getInstance()->initWithBaseNode(layer);
+        //팝업을 쓰기 위해서 씬이 바뀔때 마다 베이스노드가 될 레이어를 붙임
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
         
         return scene;
     }
@@ -192,10 +195,14 @@ void TitleLayer::onEnter() {
     keyListener->onKeyReleased = CC_CALLBACK_2(TitleLayer::onKeyReleased, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(keyListener, this);
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
     
     scheduleOnce(schedule_selector(TitleLayer::checkDailyBonus), 0.1f);
 }
@@ -210,7 +217,7 @@ void TitleLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event *event) {
     if(keycode == EventKeyboard::KeyCode::KEY_BACK) {
         auto popup = ExitPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
         
         AUDIO->playEffect("sfx/click.mp3");
@@ -250,6 +257,7 @@ void TitleLayer::callbackRank(Ref* pSender) {
 void TitleLayer::callbackLike(Ref* pSender) {
 }
 
+//옵셥 씬으로 트랜지션
 void TitleLayer::callbackMore(Ref* pSender) {
     auto scene = MoreLayer::createScene();
     auto director = Director::getInstance();
@@ -258,7 +266,7 @@ void TitleLayer::callbackMore(Ref* pSender) {
     AUDIO->playEffect("sfx/click.mp3");
 }
 
-
+//상점 씬으로 트랜지션
 void TitleLayer::callbackShop(Ref* pSender) {
     auto scene = ShopLayer::createScene();
     auto director = Director::getInstance();
@@ -273,14 +281,16 @@ void TitleLayer::checkDailyBonus(float dt) {
     int today = t2->tm_mday;
     int last = ACCOUNT->lastlogin;
     
+    //lastLogin 날짜와 현재 날짜를 비교해서 첫 접속인지 체크
     if(last != today) {
         ACCOUNT->lastlogin = today;
         ACCOUNT->hint += 1;
         ACCOUNT->sync();
         
+        //첫 접속이면 힌트 아이템을 주고 팝업 노출
         auto popup = DailyPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
     }
 }

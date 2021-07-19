@@ -137,7 +137,7 @@ void HintPopup::update(float dt) {
 }
 
 void HintPopup::callbackNo(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     SimpleAudioEngine::getInstance()->playEffect("sfx/click.mp3");
 }
@@ -145,14 +145,14 @@ void HintPopup::callbackNo(Ref* pSender) {
 void HintPopup::callbackShop(Ref* pSender) {
     auto popup = ShopPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     SimpleAudioEngine::getInstance()->playEffect("sfx/click.mp3");
 }
 
 void HintPopup::callbackYes(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     EVENT_DISPATCHER->dispatchCustomEvent(E_USE_HINT);
     

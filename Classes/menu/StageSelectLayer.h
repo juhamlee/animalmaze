@@ -24,11 +24,14 @@ public:
     void callbackUnlock(Ref* pSender);
     void callbackSelect(Ref* pSender);
     
+    void onReload(EventCustom* event);
+    
     // implement the "static create()" method manually
     CREATE_FUNC(StageSelectLayer);
     
 public:
     EventListenerKeyboard* keyListener;
+    EventListenerCustom* customListener;
     
     int category;
 };

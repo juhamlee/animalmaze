@@ -106,7 +106,7 @@ bool ExitPopup::onTouchBegan(Touch* touch, Event* event) {
 
 void ExitPopup::onKeyReleased(EventKeyboard::KeyCode keycode, Event *event) {
     if(keycode == EventKeyboard::KeyCode::KEY_BACK) {
-        PopupManager::getInstance()->closePopup();
+        POPUP_MANAGER->closePopup();
         
         AUDIO->playEffect("sfx/click.mp3");
     }
@@ -121,7 +121,7 @@ void ExitPopup::callbackYes(Ref* pSender) {
 }
 
 void ExitPopup::callbackNo(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }

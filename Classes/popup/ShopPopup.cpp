@@ -8,6 +8,7 @@
 #include "ShopPopup.h"
 #include "WaitPopup.h"
 #include "PopupManager.h"
+#include "PluginIAP/PluginIAP.h"
 
 static const int FONT_SIZE_TEXT = 45;
 static const int FONT_SIZE_PRICE = 30;
@@ -50,6 +51,9 @@ bool ShopPopup::init()
                 btn->addClickEventListener(CC_CALLBACK_1(ShopPopup::callbackBuy, this));
                 btn->setPosition(Vec2(235, 567 - 99 * i));
                 sprPopup->addChild(btn, Z_ITEM);
+                
+                if(vecInfo[i].isNoAds == true && ACCOUNT->isNoAds == true)
+                    btn->setEnabled(false);
                 
                 auto sprPriceBack = Scale9Sprite::create("ui/board_price.png");
                 if(sprPriceBack != nullptr) {
@@ -164,14 +168,30 @@ void ShopPopup::update(float dt) {
 void ShopPopup::callbackBuy(Ref* pSender) {
     auto popup = WaitPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup, true);
         
         AUDIO->playEffect("sfx/click.mp3");
+    }
+    
+    Node* p = (Node*)pSender;
+    if(p) {
+        int tag = p->getTag();
+        
+        if(tag == 0)
+            sdkbox::IAP::purchase(SKU_HINT_5);
+        else if(tag == 1)
+            sdkbox::IAP::purchase(SKU_HINT_25);
+        else if(tag == 2)
+            sdkbox::IAP::purchase(SKU_HINT_100);
+        else if(tag == 3)
+            sdkbox::IAP::purchase(SKU_HINT_250);
+        else if(tag == 4)
+            sdkbox::IAP::purchase(SKU_NO_ADS);
     }
 }
 
 void ShopPopup::callbackOk(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }

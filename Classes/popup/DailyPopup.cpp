@@ -122,7 +122,7 @@ void DailyPopup::update(float dt) {
 }
 
 void DailyPopup::callbackOk(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }

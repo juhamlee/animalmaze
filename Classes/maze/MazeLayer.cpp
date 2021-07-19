@@ -27,6 +27,9 @@ static const float SPEED_FALL = 0.1f;
 static const float SPEED_MOVE = 0.1f;
 static const float SPEED_GHOST = 450.f;
 
+static const int HINT_LIMIT = 1;
+static const int HINT_LIMIT_HURRYUP = 4;
+
 static const int BG_SIZE = 7;
 static const int BG_OFFSETS[] = {
     1280,
@@ -136,7 +139,8 @@ Scene* MazeLayer::createScene()
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
         
-        PopupManager::getInstance()->initWithBaseNode(layer);
+        POPUP_MANAGER->initWithBaseNode(layer);
+        ScreenLog::getInstance()->attachToScene( scene );
         
         return scene;
     }
@@ -336,7 +340,11 @@ bool MazeLayer::init()
     state = READY;
     isTouch = false;
     isFollow = false;
-    isHintUsed = false;
+    
+    hintLimit = HINT_LIMIT;
+    hintUsed = 0;
+    if(STAGE_MANAGER->currentStage.category == StageManager::CATEGORY_HURRYUP)
+        hintLimit = HINT_LIMIT_HURRYUP;
 
     vecTrace.clear();
     vecTracePosition.clear();
@@ -354,11 +362,13 @@ void MazeLayer::onEnter() {
     listener->onTouchMoved = CC_CALLBACK_2(MazeLayer::onTouchMoved, this);
     
     customListener = EventListenerCustom::create(E_USE_HINT, CC_CALLBACK_1(MazeLayer::onUseHint, this));
+    refreshListener = EventListenerCustom::create(E_REFRESH_HINT, CC_CALLBACK_1(MazeLayer::onRefreshHint, this));
     finishListener = EventListenerCustom::create(E_AD_VIDEO_CLOSE, CC_CALLBACK_1(MazeLayer::onFinish, this));
     
     
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(listener, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(customListener, this);
+    EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(refreshListener, this);
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(finishListener, this);
     
     string str = FileUtils::getInstance()->getStringFromFile(STAGE_MANAGER->currentStage.filepath);
@@ -571,15 +581,20 @@ void MazeLayer::onEnter() {
     
     scheduleUpdate();
     
-    if(sdkbox::PluginAdMob::isAvailable("home"))
-        sdkbox::PluginAdMob::show("home");
+    if(ACCOUNT->isNoAds == false) {
+        if(sdkbox::PluginAdMob::isAvailable("home"))
+            sdkbox::PluginAdMob::show("home");
+        else
+            sdkbox::PluginAdMob::cache("home");
+    }
     else
-        sdkbox::PluginAdMob::cache("home");
+        sdkbox::PluginAdMob::hide("home");
 }
 
 void MazeLayer::onExit() {
     EVENT_DISPATCHER->removeEventListener(listener);
     EVENT_DISPATCHER->removeEventListener(customListener);
+    EVENT_DISPATCHER->removeEventListener(refreshListener);
     EVENT_DISPATCHER->removeEventListener(finishListener);
     
     Layer::onExit();
@@ -682,7 +697,7 @@ void MazeLayer::update(float dt) {
             
             auto popup = TimeupPopup::create();
             if(popup != nullptr) {
-                PopupManager::getInstance()->addPopup(popup);
+                POPUP_MANAGER->addPopup(popup);
             }
             
             if(moveSoundId != -1) {
@@ -695,8 +710,8 @@ void MazeLayer::update(float dt) {
 
 void MazeLayer::onUseHint(EventCustom* event) {
     int hint = ACCOUNT->hint;
-    if(0 < hint && isHintUsed == false) {
-        isHintUsed = true;
+    if(0 < hint && hintUsed < hintLimit) {
+        hintUsed++;
         
         ACCOUNT->hint = hint - 1;
         ACCOUNT->sync();
@@ -720,7 +735,19 @@ void MazeLayer::onUseHint(EventCustom* event) {
     }
 }
 
+void MazeLayer::onRefreshHint(EventCustom* event) {
+    int hint = ACCOUNT->hint;
+    
+    char buf[16];
+    sprintf(buf, "%d", hint);
+    labHint->setString(buf);
+}
+
 void MazeLayer::onFinish(EventCustom* event) {
+    if(ACCOUNT->isNoAds == false) {
+        sdkbox::PluginAppnext::refreshVideo("fullscreen");
+    }
+    
     AUDIO->resumeBackgroundMusic();
     scheduleOnce(schedule_selector(MazeLayer::finish), 0.1f);
 }
@@ -728,7 +755,7 @@ void MazeLayer::onFinish(EventCustom* event) {
 void MazeLayer::callbackPause(Ref* pSender) {
     auto popup = PausePopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");
@@ -745,7 +772,7 @@ void MazeLayer::callbackRetry(Ref* pSender) {
 void MazeLayer::callbackHint(Ref* pSender) {
     auto popup = HintPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");
@@ -761,14 +788,17 @@ void MazeLayer::start() {
     AUDIO->playBackgroundMusic(buf, true);
 }
 
+//방향별로 캐릭터의 이동을 구현함 함수
 void MazeLayer::moveUp() {
     state = MOVE;
     isTouch = false;
     ptLast = ptCurrent;
     ptCurrent.y++;
     
+    //pathTrace(PathLayer 클래스)에 자취를 그릴 수 있도록 좌표를 추가함
     if(2 <= vecTrace.size()) {
         int size = (int)vecTrace.size();
+        //이전 좌표와 타겟 좌표가 같을 경우 (= 돌아온 길을 되돌아 가는 경우) 자취를 지운다
         if(vecTrace[size - 2] == ptCurrent) {
             vecTrace.pop_back();
             vecTracePosition.pop_back();
@@ -779,6 +809,7 @@ void MazeLayer::moveUp() {
     
     player->hideArrowAll();
     lastDirection = DIR_U;
+    //최근 방향을 저장함
     
     float delay = SPEED_MOVE * fScale;
     float dleay2 = delay + 0.001f;
@@ -788,6 +819,8 @@ void MazeLayer::moveUp() {
     player->setPosition(getPositionFromPoint(ptLast));
     player->runAction(move);
     
+    //이동하는 액션
+    //이동이 끝나면 갈림길이 있는지를 체크한다
     this->runAction(Sequence::create(DelayTime::create(dleay2), CallFunc::create(CC_CALLBACK_0(MazeLayer::check, this)), NULL));
 }
 
@@ -883,10 +916,12 @@ void MazeLayer::moveRight() {
     this->runAction(Sequence::create(DelayTime::create(dleay2), CallFunc::create(CC_CALLBACK_0(MazeLayer::check, this)), NULL));
 }
 
+//이동을 마친 캐릭터가 다음 행동을 결정하는 함수
 void MazeLayer::check() {
-    if(state == FINISH)
+    if(state == FINISH) //골인일 경우
         return;
     
+    //도착한 칸을 자취목록(pathTrace/PathLayer Class)에 추가함
     int size = (int)vecTrace.size();
     if(0 < size && vecTrace[size - 1] == ptCurrent) {
         pathTrace->setExtraPoint(getPositionFromPoint(ptCurrent));
@@ -920,6 +955,7 @@ void MazeLayer::check() {
         }
     }
     else {
+        //상하좌우 이동가능한 뚫린길의 수를 구함
         int count = 0;
         if(!(getMapFromPoint(ptCurrent) & DIR_R))
             count++;
@@ -935,6 +971,8 @@ void MazeLayer::check() {
             clear();
         }
         else if(count == 2) {
+            //이동가능 방향이 2개 (왔던 길, 나아갈 길)
+            //즉 갈림길이 아닐 경우 왔던길이 아닌 곳으로 이동을 반복한다.
             if(!(getMapFromPoint(ptCurrent) & DIR_R) && ptLast.x <= ptCurrent.x)
                 moveRight();
             else if(!(getMapFromPoint(ptCurrent) & DIR_L) && ptCurrent.x <= ptLast.x)
@@ -982,13 +1020,18 @@ void MazeLayer::clear() {
     ACCOUNT->ads_count++;
     int count = ACCOUNT->ads_count;
     
-    if(120 <= elapsed || 4 <= count) {
-        if(sdkbox::PluginAppnext::isVideoReady("fullscreen")) {
-            ACCOUNT->ads_time = current;
-            ACCOUNT->ads_count = 0;
-            
-            sdkbox::PluginAppnext::showVideo("fullscreen");
-            AUDIO->pauseBackgroundMusic();
+    if(ACCOUNT->isNoAds == false) {
+        if(120 <= elapsed || 4 <= count) {
+            if(sdkbox::PluginAppnext::isVideoReady("fullscreen")) {
+                ACCOUNT->ads_time = current;
+                ACCOUNT->ads_count = 0;
+                
+                sdkbox::PluginAppnext::showVideo("fullscreen");
+                AUDIO->pauseBackgroundMusic();
+            }
+            else {
+                finish();
+            }
         }
         else {
             finish();
@@ -1014,13 +1057,13 @@ void MazeLayer::finish(float dt) {
         CollectPopup::strCollect = name;
         auto popup = CollectPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
     }
     else {
         auto popup = ClearPopup::create();
         if(popup != nullptr) {
-            PopupManager::getInstance()->addPopup(popup);
+            POPUP_MANAGER->addPopup(popup);
         }
     }
     

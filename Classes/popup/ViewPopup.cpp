@@ -80,7 +80,7 @@ void ViewPopup::update(float dt) {
 }
 
 void ViewPopup::callbackBack(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }

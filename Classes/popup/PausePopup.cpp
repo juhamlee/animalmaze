@@ -87,10 +87,12 @@ bool PausePopup::init()
 void PausePopup::onEnter() {
     Layer::onEnter();
     
+    //팝업의 뒷 레이어로 터치가 되는걸 막기위한 터치이벤트
     listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
     listener->onTouchBegan = CC_CALLBACK_2(PausePopup::onTouchBegan, this);
     
+    //화면에 그려지는 순서로 실행되는 터치이벤트 등록
     EVENT_DISPATCHER->addEventListenerWithSceneGraphPriority(listener, this);
     
     scheduleUpdate();
@@ -119,7 +121,7 @@ void PausePopup::callbackHome(Ref* pSender) {
 }
 
 void PausePopup::callbackResume(Ref* pSender) {
-    PopupManager::getInstance()->closePopup();
+    POPUP_MANAGER->closePopup();
     
     AUDIO->playEffect("sfx/click.mp3");
 }
@@ -127,7 +129,7 @@ void PausePopup::callbackResume(Ref* pSender) {
 void PausePopup::callbackShop(Ref* pSender) {
     auto popup = ShopPopup::create();
     if(popup != nullptr) {
-        PopupManager::getInstance()->addPopup(popup);
+        POPUP_MANAGER->addPopup(popup);
     }
     
     AUDIO->playEffect("sfx/click.mp3");

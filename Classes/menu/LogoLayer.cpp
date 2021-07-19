@@ -15,6 +15,9 @@ Scene* LogoLayer::createScene()
     
     if(scene != nullptr && layer != nullptr) {
         scene->addChild(layer);
+        
+        ScreenLog::getInstance()->attachToScene( scene );
+        
         return scene;
     }
     
@@ -64,7 +67,10 @@ void LogoLayer::finish() {
         AUDIO->setBackgroundMusicVolume(FLT_MIN);
         AUDIO->setEffectsVolume(FLT_MIN);
     }
-    time = 10.f;
+    if(ACCOUNT->isNoAds == false)
+        time = 10.f;
+    else
+        time = 3.f;
 }
 
 void LogoLayer::update(float dt) {
@@ -74,13 +80,16 @@ void LogoLayer::update(float dt) {
             delay += dt;
             if(0.5f < delay) {
                 delay = 0.f;
-                if(sdkbox::PluginAppnext::isAdReady()) {
-                    sdkbox::PluginAppnext::showAd();
-                    delay = 0.f;
-                    time = 0.f;
+                
+                if(ACCOUNT->isNoAds == false) {
+                    if(sdkbox::PluginAppnext::isAdReady()) {
+                        sdkbox::PluginAppnext::showAd();
+                        delay = 0.f;
+                        time = 0.f;
+                    }
+                    else
+                        sdkbox::PluginAppnext::cacheAd("default");
                 }
-                else
-                    sdkbox::PluginAppnext::cacheAd("default");
             }
         }
         

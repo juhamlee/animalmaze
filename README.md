@@ -1,2 +1,3 @@
 # Animal Maze
-![Untitled 2](https://user-images.githubusercontent.com/29085359/126217340-ff1f0588-cdcb-4ab0-a0b5-eb57ce89597a.png)
+![Untitled 2](https://user-images.githubusercontent.com/29085359/126217444-8aa619e4-b0c7-44b7-b728-9e3a0b06aed2.png)
+

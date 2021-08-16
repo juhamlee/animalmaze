@@ -3,6 +3,8 @@
 
 from tkinter import filedialog
 from tkinter import *
+from PIL import Image, ImageTk
+
 import math
 import json
 import os
@@ -121,8 +123,8 @@ class App:
         btnAuto = Button(frameButton, text="Auto Edge", command=self.AutoFunc)
         btnAuto.pack(padx=3, pady=3)
 
-        btnFolder = Button(frameButton, text="Folder Script", command=self.FolderScriptFunc)
-        btnFolder.pack(padx=3, pady=3)
+        #btnFolder = Button(frameButton, text="Folder Script", command=self.FolderScriptFunc)
+        #btnFolder.pack(padx=3, pady=3)
 
         self.BackgroundImage = PhotoImage()
         self.BackgroundImage.blank()
@@ -141,8 +143,11 @@ class App:
         if os.path.isfile(filename) == FALSE:
             return
 
+        image = Image.open(filename)
+        w, h = GetScaledCanvasSize()
+        image_resize = image.resize((int(w), int(h)), Image.ANTIALIAS)
         self.BackgroundImage.blank()
-        self.BackgroundImage = PhotoImage(file=filename)
+        self.BackgroundImage = ImageTk.PhotoImage(image=image_resize)
 
         self.RedrawMaze()
 
@@ -468,8 +473,7 @@ class App:
 
         m = self.Maze
 
-        self.resizedImage = self.BackgroundImage.subsample((int)(1/CANVAS_SCALE), (int)(1/CANVAS_SCALE))
-        c.create_image(0, 0, image=self.resizedImage, anchor=NW)
+        c.create_image(0, 0, image=self.BackgroundImage, anchor=NW)
         for k in range(0, len(m.nodes)):
             node = m.nodes[k]
             x, y = node[0] * CANVAS_SCALE, node[1] * CANVAS_SCALE
@@ -512,9 +516,9 @@ class App:
 root = Tk()
 root.title('Maze Maker (Alaphbet)')
 root.resizable(width=False, height=False)
-screen_h = root.winfo_screenheight() - 100
+screen_h = root.winfo_screenheight() - 150
 if(screen_h < CANVAS_HEIGHT):
-    CANVAS_SCALE = 0.5
+    CANVAS_SCALE = screen_h / CANVAS_HEIGHT
 else:
     CANVAS_SCALE = 1
 app = App(root)

@@ -3,15 +3,16 @@
 
 from tkinter import filedialog
 from tkinter import *
-from datetime import datetime
 import math
 import json
 import os
 
 CANVAS_WIDTH = 700
 CANVAS_HEIGHT = 900
-DEFAULT_MAP_WIDTH = 20
-DEFAULT_MAP_HEIGHT = 20
+CANVAS_SCALE = 1
+
+def GetScaledCanvasSize():
+    return CANVAS_WIDTH * CANVAS_SCALE, CANVAS_HEIGHT * CANVAS_SCALE
 
 class Maze:
     nodes = []
@@ -69,12 +70,12 @@ class Maze:
         return result[0]
 
 class App:
-
     def __init__(self, master):
-        frame = Frame(master)
-        frame.pack()
+        frameCanvas = Frame(master)
+        frameCanvas.pack(side=LEFT)
 
-        self.canvas = Canvas(frame, dict(width=CANVAS_WIDTH, height=CANVAS_HEIGHT))
+        w, h = GetScaledCanvasSize()
+        self.canvas = Canvas(frameCanvas, dict(width=w, height=h), bg='MistyRose2')
         self.canvas.bind("<Key>", self.KeyPressed)
         self.canvas.bind("<Up>", self.KeyUp)
         self.canvas.bind("<Down>", self.KeyDown)
@@ -82,7 +83,6 @@ class App:
         self.canvas.bind("<Right>", self.KeyRight)
         self.canvas.bind("<Button-1>", self.MouseDownL)
         self.canvas.bind("<Button-3>", self.MouseDownR)
-        self.canvas.bind("<B1-Motion>", self.MouseMove)
         self.canvas.pack()
 
         self.canvas.focus_set()
@@ -94,41 +94,35 @@ class App:
         selected = -1
         recent = -1
 
-        f = Frame(master)
-        f.pack()
+        frameButton = Frame(master)
+        frameButton.pack(side=RIGHT)
 
-        t = Label(f, text="Mode:")
-        t.pack(side=LEFT)
-        self.t2 = Label(f, text="Select")
-        self.t2.pack(side=LEFT)
+        self.labelMode = Label(frameButton, text="Mode : Select")
+        self.labelMode.pack(padx=3, pady=3)
 
-        btnLoadBG = Button(f, text="LoadBG", command=self.LoadBG)
-        btnLoadBG.pack(side=LEFT)
+        btnLoadBG = Button(frameButton, text="Load Background", command=self.LoadBG)
+        btnLoadBG.pack(padx=3, pady=3)
 
-        btnLoad = Button(f, text="Load", command=self.Load)
-        btnLoad.pack(side=LEFT)
+        btnLoad = Button(frameButton, text="Load Script", command=self.Load)
+        btnLoad.pack(padx=3, pady=3)
 
-        btnSave = Button(f, text="Save", command=self.Save)
-        btnSave.pack(side=LEFT)
+        btnSave = Button(frameButton, text="Save Script", command=self.Save)
+        btnSave.pack(padx=3, pady=3)
 
-        b = Button(f, text="Clear", command=self.ClearFunc)
-        b.pack(side=LEFT)
+        btnClear = Button(frameButton, text="Clear", command=self.ClearFunc)
+        btnClear.pack(padx=3, pady=3)
 
-        b2 = Button(f, text="Hint", command=self.HintFunc)
-        b2.pack(side=LEFT)
+        btnHint = Button(frameButton, text="Hint", command=self.HintFunc)
+        btnHint.pack(padx=3, pady=3)
 
-        self.t3 = Label(f, text='0')
-        self.t3.pack(side=LEFT)
-        t4 = Label(f, text=' x ')
-        t4.pack(side=LEFT)
-        self.t5 = Label(f, text='0')
-        self.t5.pack(side=LEFT)
+        self.labelCoord = Label(frameButton, text='0, 0')
+        self.labelCoord.pack(padx=3, pady=3)
 
-        btnAuto = Button(f, text="Auto", command=self.AutoFunc)
-        btnAuto.pack(side=LEFT)
+        btnAuto = Button(frameButton, text="Auto Edge", command=self.AutoFunc)
+        btnAuto.pack(padx=3, pady=3)
 
-        btnMee = Button(f, text="MEE", command=self.Mee)
-        btnMee.pack(side=LEFT)
+        btnFolder = Button(frameButton, text="Folder Script", command=self.FolderScriptFunc)
+        btnFolder.pack(padx=3, pady=3)
 
         self.BackgroundImage = PhotoImage()
         self.BackgroundImage.blank()
@@ -174,7 +168,7 @@ class App:
         for k in range(0, len(data['nodes'])):
             pos = []
             pos.append(data['nodes'][k]['x'])
-            pos.append(900 - data['nodes'][k]['y'])
+            pos.append(CANVAS_HEIGHT - data['nodes'][k]['y'])
             self.Maze.nodes.append(pos)
 
         for k in range(0, len(data['edges'])):
@@ -211,7 +205,7 @@ class App:
             node = {}
             node['idx'] = k + 1
             node['x'] = self.Maze.nodes[k][0]
-            node['y'] = 900 - self.Maze.nodes[k][1]
+            node['y'] = CANVAS_HEIGHT - self.Maze.nodes[k][1]
 
             data['nodes'].append(node)
 
@@ -235,30 +229,7 @@ class App:
 
         pass
 
-    def Mee2(self):
-        currentDir = os.getcwd()
-        folder = filedialog.askdirectory(initialdir=currentDir)
-
-        print(folder)
-
-        arr = os.listdir(folder)
-        for filename in arr:
-            print(filename)
-            if filename.endswith('.json'):
-                filepath = folder + '/' + filename
-                print(filepath)
-                jsondata = open(filepath).read()
-                js = json.loads(jsondata)
-
-                if 'alphabet' in js:
-                    js = {}
-                    js['null'] = ''
-
-                    savepath = currentDir + '/' + filename
-                    with open(savepath, 'w') as outfile:
-                        json.dump(js, outfile)
-
-    def Mee(self):
+    def FolderScriptFunc(self):
         currentDir = os.getcwd()
         folder = filedialog.askdirectory(initialdir=currentDir)
 
@@ -311,39 +282,33 @@ class App:
         self.Maze.AutoEdge()
         self.RedrawMaze()
 
-    def ToggleTime(self):
-        pass
-
-    def StepNext(self):
-        pass
-
     def KeyPressed(self, event):
         global mode, isEdge, selected, recent
         if event.char == '1':
             mode = 1
             selected = -1
             recent = -1
-            self.t2.config(text='Select')
+            self.labelMode.config(text='Mode : Select')
         elif event.char == '2':
             mode = 2
             selected = -1
             recent = -1
-            self.t2.config(text='Node+')
+            self.labelMode.config(text='Mode : Node+')
         elif event.char == '3':
             mode = 3
             selected = -1
             recent = -1
-            self.t2.config(text='Node-')
+            self.labelMode.config(text='Mode : Node-')
         elif event.char == '4':
             mode = 4
             selected = -1
             recent = -1
-            self.t2.config(text='Edge+')
+            self.labelMode.config(text='Mode : Edge+')
         elif event.char == '5':
             mode = 5
             selected = -1
             recent = -1
-            self.t2.config(text='Edge-')
+            self.labelMode.config(text='Mode : Edge-')
 
         if 0 <= selected:
             global start, end
@@ -359,32 +324,32 @@ class App:
         global selected
         if 0 <= selected:
             self.Maze.nodes[selected][1] = self.Maze.nodes[selected][1] - 1
-            self.t3.config(text=str(self.Maze.nodes[selected][0]))
-            self.t5.config(text=str(self.Maze.nodes[selected][1]))
+            string = str(self.Maze.nodes[selected][0]) + ', ' + str(self.Maze.nodes[selected][1])
+            self.labelCoord.config(text=string)
             self.RedrawMaze()
 
     def KeyDown(self, event):
         global selected
         if 0 <= selected:
             self.Maze.nodes[selected][1] = self.Maze.nodes[selected][1] + 1
-            self.t3.config(text=str(self.Maze.nodes[selected][0]))
-            self.t5.config(text=str(self.Maze.nodes[selected][1]))
+            string = str(self.Maze.nodes[selected][0]) + ', ' + str(self.Maze.nodes[selected][1])
+            self.labelCoord.config(text=string)
             self.RedrawMaze()
 
     def KeyLeft(self, event):
         global selected
         if 0 <= selected:
             self.Maze.nodes[selected][0] = self.Maze.nodes[selected][0] - 1
-            self.t3.config(text=str(self.Maze.nodes[selected][0]))
-            self.t5.config(text=str(self.Maze.nodes[selected][1]))
+            string = str(self.Maze.nodes[selected][0]) + ', ' + str(self.Maze.nodes[selected][1])
+            self.labelCoord.config(text=string)
             self.RedrawMaze()
 
     def KeyRight(self, event):
         global selected
         if 0 <= selected:
             self.Maze.nodes[selected][0] = self.Maze.nodes[selected][0] + 1
-            self.t3.config(text=str(self.Maze.nodes[selected][0]))
-            self.t5.config(text=str(self.Maze.nodes[selected][1]))
+            string = str(self.Maze.nodes[selected][0]) + ', ' + str(self.Maze.nodes[selected][1])
+            self.labelCoord.config(text=string)
             self.RedrawMaze()
 
     def MouseDownL(self, event):
@@ -398,8 +363,8 @@ class App:
             dist = 9999
             sel = -1
             for k in range(0, len(self.Maze.nodes)):
-                off_x = abs(self.Maze.nodes[k][0] - x)
-                off_y = abs(self.Maze.nodes[k][1] - y)
+                off_x = abs(self.Maze.nodes[k][0] * CANVAS_SCALE - x)
+                off_y = abs(self.Maze.nodes[k][1] * CANVAS_SCALE - y)
                 offset = math.sqrt(off_x * off_x + off_y * off_y)
                 if offset < dist and offset <= 5:
                     sel = k
@@ -409,12 +374,12 @@ class App:
             if selected != sel:
                 selected = sel
 
-                self.t3.config(text=str(self.Maze.nodes[selected][0]))
-                self.t5.config(text=str(self.Maze.nodes[selected][1]))
+                string = str(self.Maze.nodes[selected][0]) + ', ' + str(self.Maze.nodes[selected][1])
+                self.labelCoord.config(text=string)
                 self.RedrawMaze()
 
         elif mode == 2:
-            self.Maze.nodes.append([x, y])
+            self.Maze.nodes.append([x / CANVAS_SCALE, y / CANVAS_SCALE])
             self.Maze.edges.append([])
             self.RedrawMaze()
 
@@ -422,8 +387,8 @@ class App:
             dist = 9999
             sel = -1
             for k in range(0, len(self.Maze.nodes)):
-                off_x = abs(self.Maze.nodes[k][0] - x)
-                off_y = abs(self.Maze.nodes[k][1] - y)
+                off_x = abs(self.Maze.nodes[k][0] * CANVAS_SCALE - x)
+                off_y = abs(self.Maze.nodes[k][1] * CANVAS_SCALE - y)
                 offset = math.sqrt(off_x * off_x + off_y * off_y)
                 if offset < dist and offset <= 5:
                     sel = k
@@ -448,8 +413,8 @@ class App:
             dist = 9999
             sel = -1
             for k in range(0, len(self.Maze.nodes)):
-                off_x = abs(self.Maze.nodes[k][0] - x)
-                off_y = abs(self.Maze.nodes[k][1] - y)
+                off_x = abs(self.Maze.nodes[k][0] * CANVAS_SCALE - x)
+                off_y = abs(self.Maze.nodes[k][1] * CANVAS_SCALE - y)
                 offset = math.sqrt(off_x * off_x + off_y * off_y)
                 if offset < dist and offset <= 5:
                     sel = k
@@ -472,8 +437,8 @@ class App:
             dist = 9999
             sel = -1
             for k in range(0, len(self.Maze.nodes)):
-                off_x = abs(self.Maze.nodes[k][0] - x)
-                off_y = abs(self.Maze.nodes[k][1] - y)
+                off_x = abs(self.Maze.nodes[k][0] * CANVAS_SCALE - x)
+                off_y = abs(self.Maze.nodes[k][1] * CANVAS_SCALE - y)
                 offset = math.sqrt(off_x * off_x + off_y * off_y)
                 if offset < dist and offset <= 5:
                     sel = k
@@ -494,31 +459,6 @@ class App:
         isEdge = FALSE
         self.RedrawMaze()
 
-    def MouseMove(self, event):
-        global mode, recent, isEdge
-
-        x, y = event.x, event.y
-
-        if mode == 4 and isEdge == TRUE:
-            dist = 9999
-            sel = -1
-            for k in range(0, len(self.Maze.nodes)):
-                off_x = abs(self.Maze.nodes[k][0] - x)
-                off_y = abs(self.Maze.nodes[k][1] - y)
-                offset = math.sqrt(off_x * off_x + off_y * off_y)
-                if offset < dist and offset <= 5:
-                    sel = k
-                    dist = offset
-
-            if sel != -1 and not sel == recent:
-                if sel not in self.Maze.edges[recent]:
-                    self.Maze.edges[recent].append(sel)
-                if recent not in self.Maze.edges[sel]:
-                    self.Maze.edges[sel].append(recent)
-                recent = sel
-
-                self.RedrawMaze()
-
     def RedrawMaze(self):
         c = self.canvas
         for i in c.find_all():
@@ -528,13 +468,14 @@ class App:
 
         m = self.Maze
 
-        c.create_image(0, 0, image=self.BackgroundImage, anchor=NW)
+        self.resizedImage = self.BackgroundImage.subsample((int)(1/CANVAS_SCALE), (int)(1/CANVAS_SCALE))
+        c.create_image(0, 0, image=self.resizedImage, anchor=NW)
         for k in range(0, len(m.nodes)):
             node = m.nodes[k]
-            x, y = node[0], node[1]
+            x, y = node[0] * CANVAS_SCALE, node[1] * CANVAS_SCALE
             if k == start :
                 c.create_oval(x - 4, y - 4, x + 4, y + 4, width=2, outline="blue")
-                c.create_oval(x-100,y-100,x+100,y+100,width=1,outline='black')
+                c.create_oval(x-50,y-50,x+50,y+50,width=1,outline='black')
             elif k == end :
                 c.create_oval(x - 4, y - 4, x + 4, y + 4, width=2, outline="red")
             else :
@@ -550,8 +491,8 @@ class App:
         for k in range(0, len(m.edges)):
             adjs = m.edges[k]
             for f in adjs:
-                x0, y0 = m.nodes[k][0], m.nodes[k][1]
-                x1, y1 = m.nodes[f][0], m.nodes[f][1]
+                x0, y0 = m.nodes[k][0] * CANVAS_SCALE, m.nodes[k][1] * CANVAS_SCALE
+                x1, y1 = m.nodes[f][0] * CANVAS_SCALE, m.nodes[f][1] * CANVAS_SCALE
                 if abs(y0 - y1) < abs(x0 - x1) :
                     if k < f:
                         c.create_line(x0, y0 - 3, x1, y1 - 3, width=1, fill="darkgray")
@@ -565,9 +506,16 @@ class App:
 
         for k in range(0, len(m.hints)):
             h = m.hints[k]
-            x, y = m.nodes[h][0], m.nodes[h][1]
+            x, y = m.nodes[h][0] * CANVAS_SCALE, m.nodes[h][1] * CANVAS_SCALE
             c.create_text(x + 7, y - 7, fill='blue', font='Times 10 bold', text=str(k))
 
 root = Tk()
+root.title('Maze Maker (Alaphbet)')
+root.resizable(width=False, height=False)
+screen_h = root.winfo_screenheight() - 100
+if(screen_h < CANVAS_HEIGHT):
+    CANVAS_SCALE = 0.5
+else:
+    CANVAS_SCALE = 1
 app = App(root)
 root.mainloop()
